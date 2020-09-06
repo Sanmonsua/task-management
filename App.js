@@ -1,21 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Constants from "expo-constants";
+import { category } from "./mockData";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component {
+  render(){
+    return (
+      <View style={styles.container}>
+        <View style={styles.tasks}>
+          <Text style={styles.textMuted}>TASKS LIST</Text>
+          <Text style={styles.title}>
+            {category.name}
+          </Text>
+        </View>
+        <View style={styles.categories}></View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    paddingTop: Constants.statusBarHeight,
   },
+  tasks: {
+    backgroundColor: "white",
+    width: "80%",
+    flex: 1,
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+  },
+  categories: {
+    backgroundColor: "#222429",
+    width: "20%",
+  },
+  textMuted: { 
+    color: "#d1d9e4", 
+    fontSize: 18 
+  },
+  title : {
+    fontSize: 50, 
+    fontWeight: "bold"
+  }
 });
