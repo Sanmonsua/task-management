@@ -14,7 +14,8 @@ export default class App extends React.Component {
 
   loadAssetsAsync = async () => {
     const fonts = Font.loadAsync({
-      roboto : require('./assets/fonts/Roboto/Roboto-Regular.ttf')
+      kumbhSans : require('./assets/fonts/KumbhSans-Regular.ttf'),
+      kumbhSansBold : require('./assets/fonts/KumbhSans-Bold.ttf'),
     })
 
     return Promise.all(fonts)
@@ -47,7 +48,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <View style={styles.tasks}>
           <Text style={styles.textMuted}>TASKS LIST</Text>
-          <Text style={{... styles.title, fontFamily:'roboto'}}>
+          <Text style={{... styles.title}}>
             {category.name}
           </Text>
           <FlatList
@@ -86,11 +87,11 @@ const styles = StyleSheet.create({
   textMuted: { 
     color: "#d1d9e4", 
     fontSize: 18,
-    fontWeight : 'bold',
+    fontFamily : 'kumbhSansBold',
   },
   title : {
     fontSize: 50, 
-    fontWeight: "bold",
+    fontFamily : 'kumbhSansBold',
   },
   addButton : {
     alignSelf: "center",
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   addButtonLabel : {
     alignSelf : 'center',
     color : 'white',
-    fontWeight: "bold",
+    fontFamily : 'kumbhSansBold',
     fontSize : 17,
   },
 });

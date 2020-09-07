@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     },
     taskName : {
         fontSize : 17,
-        fontWeight: 'bold',
+        fontFamily : 'kumbhSansBold',
     },
     taskDate: {
-        fontWeight : 'bold',
+        fontFamily : 'kumbhSansBold',
         color : "#d1d9e4",
         marginTop : 5,
     }
