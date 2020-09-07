@@ -1,34 +1,27 @@
 import React from 'react'
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native'
 
-export const Task = ({item}) => (
+export const Task = ({item, color}) => (
     <TouchableOpacity style={styles.taskContainer}>
         <Text style={styles.taskName}>
             {item.name}
         </Text>
-        <Text style={styles.taskDate}>
-            {item.date.toUpperCase()}
-        </Text>
-    </TouchableOpacity>
-)
-
-export const TaskCompleted = ({item, color}) => (
-    <TouchableOpacity style={{... styles.taskContainer}}>
-        <Text style={{... styles.taskName}}>
-            {item.name}
-        </Text>
-        
         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
             <Text style={styles.taskDate}>
                 {item.date.toUpperCase()}
             </Text>
-            <Text style={{... styles.taskDate, color:color}}>
-                COMPLETED !
-            </Text>
+            {item.done && 
+                <Text style={{... styles.taskDate, color:color}}>
+                    COMPLETED !
+                </Text>
+            }
+            
         </View>
-        
+
     </TouchableOpacity>
 )
+
+export default Task
 
 const styles = StyleSheet.create({
     taskContainer : {

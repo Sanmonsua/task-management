@@ -4,7 +4,7 @@ import { category, categories } from "./mockData"
 import Constants from 'expo-constants'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
-import {Task, TaskCompleted} from './components/Task'
+import Task from './components/Task'
 import CategoryButton from './components/CategoryButton'
 
 export default class App extends React.Component {
@@ -24,13 +24,12 @@ export default class App extends React.Component {
   } 
 
   renderTask = ({item}) => {
-    if (item.done){
-      return (
-        <Task item={item} color={category.color}/>
-      )
-    }
     return (
-      <TaskCompleted item={item} color={category.color}/>
+      <Task 
+        item={item} 
+        color={category.color} 
+        done={item.done}
+      />
     )
   }
 
@@ -42,7 +41,6 @@ export default class App extends React.Component {
         selected={item.id === this.state.selectedCategoryId}
         onPress={async() => {
           await this.setState({selectedCategoryId : item.id})
-          console.log(this.state)
         }}
       />
     )
