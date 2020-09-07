@@ -1,19 +1,19 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {TouchableOpacity, Text, StyleSheet, View} from 'react-native'
 
 export const Task = ({item}) => (
-    <View style={styles.taskContainer}>
+    <TouchableOpacity style={styles.taskContainer}>
         <Text style={styles.taskName}>
             {item.name}
         </Text>
         <Text style={styles.taskDate}>
             {item.date.toUpperCase()}
         </Text>
-    </View>
+    </TouchableOpacity>
 )
 
 export const TaskCompleted = ({item, color}) => (
-    <View style={{... styles.taskContainer}}>
+    <TouchableOpacity style={{... styles.taskContainer}}>
         <Text style={{... styles.taskName}}>
             {item.name}
         </Text>
@@ -27,7 +27,7 @@ export const TaskCompleted = ({item, color}) => (
             </Text>
         </View>
         
-    </View>
+    </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     taskName : {
         fontSize : 17,
-        fontFamily : 'kumbhSansBold',
+        fontFamily : 'kumbhSans',
     },
     taskDate: {
         fontFamily : 'kumbhSansBold',

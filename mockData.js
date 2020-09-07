@@ -16,3 +16,26 @@ export const category = {
     ],
     color : '#a362ea',
 }
+
+export const categories = [
+    {
+        name : "Work",
+        color : '#a362ea',
+        id : 1,
+    },
+    {
+        name : "Family",
+        color : '#f5a921',
+        id : 2,
+    },
+    {
+        name : "Software Design",
+        color : '#43c8dd',
+        id : 3,
+    },
+    {
+        name : "Programming",
+        color : '#f55c33',
+        id : 4,
+    },
+]

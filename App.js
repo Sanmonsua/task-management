@@ -1,19 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
-import { category } from "./mockData"
+import { category, categories } from "./mockData"
 import Constants from 'expo-constants'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
 import {Task, TaskCompleted} from './components/Task'
+import CategoryButton from './components/CategoryButton'
 
 export default class App extends React.Component {
 
   state = {
     isReady : false,
+    selectedCategoryId : 1,
   }
 
   loadAssetsAsync = async () => {
-    const fonts = Font.loadAsync({
+    const fonts = await Font.loadAsync({
       kumbhSans : require('./assets/fonts/KumbhSans-Regular.ttf'),
       kumbhSansBold : require('./assets/fonts/KumbhSans-Bold.ttf'),
     })
@@ -21,7 +23,7 @@ export default class App extends React.Component {
     return Promise.all(fonts)
   } 
 
-  renderItem = ({item}) => {
+  renderTask = ({item}) => {
     if (item.done){
       return (
         <Task item={item} color={category.color}/>
@@ -29,6 +31,20 @@ export default class App extends React.Component {
     }
     return (
       <TaskCompleted item={item} color={category.color}/>
+    )
+  }
+
+  renderCategory = ({item}) => {
+    return (
+      <CategoryButton 
+        name={item.name} 
+        color={item.color}
+        selected={item.id === this.state.selectedCategoryId}
+        onPress={async() => {
+          await this.setState({selectedCategoryId : item.id})
+          console.log(this.state)
+        }}
+      />
     )
   }
   
@@ -47,20 +63,27 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.tasks}>
-          <Text style={styles.textMuted}>TASKS LIST</Text>
-          <Text style={{... styles.title}}>
+          <Text style={{... styles.textMuted, fontFamily : 'kumbhSansBold',}}>TASKS LIST</Text>
+          <Text style={{... styles.title, fontFamily : 'kumbhSansBold',}}>
             {category.name}
           </Text>
           <FlatList
             data={category.tasks}
             keyExtractor={(item) => item.id}
-            renderItem={this.renderItem}
+            renderItem={this.renderTask}
           />
           <TouchableOpacity style={{... styles.addButton, backgroundColor: category.color}}>
-            <Text style={styles.addButtonLabel}>+ ADD NEW TASK</Text>
+            <Text style={{... styles.addButtonLabel, fontFamily : 'kumbhSansBold',}}>+ ADD NEW TASK</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.categories}></View>
+        <View style={styles.categories}>
+            <FlatList
+              data={categories}
+              keyExtractor={(item) => item.id}
+              renderItem={this.renderCategory}
+              extraData = {this.state.selectedCategoryId}
+            />
+        </View>
       </View>
     );
   }
@@ -83,15 +106,16 @@ const styles = StyleSheet.create({
   categories: {
     backgroundColor: "#222429",
     width: "20%",
+    padding : 12,
+    justifyContent : 'center',
   },
   textMuted: { 
     color: "#d1d9e4", 
     fontSize: 18,
-    fontFamily : 'kumbhSansBold',
+    
   },
   title : {
     fontSize: 50, 
-    fontFamily : 'kumbhSansBold',
   },
   addButton : {
     alignSelf: "center",
@@ -102,7 +126,6 @@ const styles = StyleSheet.create({
   addButtonLabel : {
     alignSelf : 'center',
     color : 'white',
-    fontFamily : 'kumbhSansBold',
     fontSize : 17,
   },
 });
