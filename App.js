@@ -15,6 +15,7 @@ export default class App extends React.Component {
     isReady : false,
     selectedCategoryId : 1,
     category : categories[0],
+    categories: categories,
   }
 
   loadAssetsAsync = async () => {
@@ -26,12 +27,18 @@ export default class App extends React.Component {
     return Promise.all(fonts)
   } 
 
-  renderTask = ({item}) => {
+  renderTask = ({item, index}) => {
     return (
       <Task 
         item={item} 
         color={category.color} 
-        done={item.done}
+        onPress={() => {
+          let tasks = this.state.category.tasks
+          tasks[index].done = !this.state.category.tasks[index].done
+          this.setState({
+            category : {... this.state.category, tasks} 
+          })
+        }}
       />
     )
   }
