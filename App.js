@@ -13,6 +13,7 @@ export default class App extends React.Component {
   state = {
     isReady : false,
     selectedCategoryId : 1,
+    category : categories[0],
   }
 
   loadAssetsAsync = async () => {
@@ -41,7 +42,10 @@ export default class App extends React.Component {
         color={item.color}
         selected={item.id === this.state.selectedCategoryId}
         onPress={async() => {
-          await this.setState({selectedCategoryId : item.id})
+          await this.setState({
+            selectedCategoryId : item.id,
+            category : item,
+          })
         }}
       />
     )
@@ -63,15 +67,18 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <View style={styles.tasks}>
           <Text style={{... styles.textMuted, fontFamily : 'kumbhSansBold',}}>TASKS LIST</Text>
-          <Text style={{... styles.title, fontFamily : 'kumbhSansBold',}}>
-            {category.name}
-          </Text>
+          <View style={{width:"100%"}}>
+            <Text numberOfLines={1} adjustsFontSizeToFit style={{... styles.title, fontFamily : 'kumbhSansBold',}}>
+              {this.state.category.name}
+            </Text>
+          </View>
+          
           <FlatList
-            data={category.tasks}
+            data={this.state.category.tasks}
             keyExtractor={(item) => item.id}
             renderItem={this.renderTask}
           />
-          <TouchableOpacity style={{... styles.addButton, backgroundColor: category.color}}>
+          <TouchableOpacity style={{... styles.addButton, backgroundColor: this.state.category.color}}>
             <Text style={{... styles.addButtonLabel, fontFamily : 'kumbhSansBold',}}>+ ADD NEW TASK</Text>
           </TouchableOpacity>
         </View>
