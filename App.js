@@ -6,6 +6,7 @@ import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
 import Task from './components/Task'
 import CategoryButton from './components/CategoryButton'
+import AddCategoryButton from './components/AddCategoryButton'
 
 export default class App extends React.Component {
 
@@ -81,6 +82,7 @@ export default class App extends React.Component {
               renderItem={this.renderCategory}
               extraData = {this.state.selectedCategoryId}
             />
+            <AddCategoryButton/>
         </View>
       </View>
     );
