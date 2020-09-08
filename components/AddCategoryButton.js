@@ -1,5 +1,5 @@
 import React from 'react'
-import {TouchableOpacity, Text, StyleSheet} from 'react-native'
+import {TouchableOpacity, StyleSheet} from 'react-native'
 import { Octicons } from '@expo/vector-icons'; 
 
 export default function AddCategoryButton () {

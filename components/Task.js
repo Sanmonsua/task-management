@@ -1,11 +1,19 @@
 import React from 'react'
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native'
+import { Ionicons } from '@expo/vector-icons'; 
 
 export const Task = ({item, color}) => (
     <TouchableOpacity style={styles.taskContainer}>
-        <Text style={styles.taskName}>
-            {item.name}
-        </Text>
+        <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+            <Text style={styles.taskName}>
+                {item.name}
+            </Text>
+            {item.done && 
+                <Ionicons name="ios-checkbox" size={24} color={color} />
+            }
+            
+        </View>
+        
         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
             <Text style={styles.taskDate}>
                 {item.date.toUpperCase()}
