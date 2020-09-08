@@ -7,6 +7,7 @@ import * as Font from 'expo-font'
 import Task from './components/Task'
 import CategoryButton from './components/CategoryButton'
 import AddCategoryButton from './components/AddCategoryButton'
+import EmptyCategory from './components/EmptyCategory'
 
 export default class App extends React.Component {
 
@@ -41,10 +42,10 @@ export default class App extends React.Component {
         name={item.name} 
         color={item.color}
         selected={item.id === this.state.selectedCategoryId}
-        onPress={async() => {
-          await this.setState({
-            selectedCategoryId : item.id,
-            category : item,
+        onPress={() => {
+          this.setState({
+            selectedCategoryId: item.id,
+            category: item,
           })
         }}
       />
@@ -77,7 +78,9 @@ export default class App extends React.Component {
             data={this.state.category.tasks}
             keyExtractor={(item) => item.id}
             renderItem={this.renderTask}
+            ListEmptyComponent={EmptyCategory}
           />
+          
           <TouchableOpacity style={{... styles.addButton, backgroundColor: this.state.category.color}}>
             <Text style={{... styles.addButtonLabel, fontFamily : 'kumbhSansBold',}}>+ ADD NEW TASK</Text>
           </TouchableOpacity>
@@ -119,7 +122,6 @@ const styles = StyleSheet.create({
   textMuted: { 
     color: "#d1d9e4", 
     fontSize: 18,
-    
   },
   title : {
     fontSize: 50, 
