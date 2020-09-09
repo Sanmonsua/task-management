@@ -8,7 +8,7 @@ const CategoryButton = ({name, color, onPress, selected}) =>{
 
     return (
         <TouchableOpacity onPress={onPress} style={{... styles.button, backgroundColor}}>
-            <Text style={{... styles.text, color : textColor}}>{name[0]}</Text>
+            <Text style={{... styles.text, color : textColor}}>{name.charAt()}</Text>
         </TouchableOpacity>
     )
     
