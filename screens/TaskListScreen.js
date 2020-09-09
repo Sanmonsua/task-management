@@ -70,7 +70,10 @@ class TaskListScreen extends React.Component {
               ListEmptyComponent={EmptyCategory}
             />
             
-            <TouchableOpacity style={{... styles.addButton, backgroundColor: this.state.category.color}}>
+            <TouchableOpacity 
+              style={{... styles.addButton, backgroundColor: this.state.category.color}}
+              onPress={()=>this.props.navigation.navigate("AddTaskScreen")}
+              >
               <Text style={{... styles.addButtonLabel, fontFamily : 'kumbhSansBold',}}>+ ADD NEW TASK</Text>
             </TouchableOpacity>
           </View>
