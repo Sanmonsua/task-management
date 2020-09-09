@@ -1,11 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import Constants from 'expo-constants'
+import { connect } from 'react-redux'
+
 import Task from '../components/Task'
 import CategoryButton from '../components/CategoryButton'
 import AddCategoryButton from '../components/AddCategoryButton'
 import EmptyCategory from '../components/EmptyCategory'
-import { connect } from 'react-redux'
+import AddTaskButton from '../components/AddTaskButton'
 
 class TaskListScreen extends React.Component {
 
@@ -56,9 +58,9 @@ class TaskListScreen extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.tasks}>
-            <Text style={{... styles.textMuted, fontFamily : 'kumbhSansBold',}}>CATEGORY</Text>
+            <Text style={styles.textMuted}>CATEGORY</Text>
             <View style={{width:"100%"}}>
-              <Text numberOfLines={1} adjustsFontSizeToFit style={{... styles.title, fontFamily : 'kumbhSansBold',}}>
+              <Text numberOfLines={1} adjustsFontSizeToFit style={styles.title}>
                 {this.state.category.name}
               </Text>
             </View>
@@ -70,12 +72,10 @@ class TaskListScreen extends React.Component {
               ListEmptyComponent={EmptyCategory}
             />
             
-            <TouchableOpacity 
-              style={{... styles.addButton, backgroundColor: this.state.category.color}}
-              onPress={()=>this.props.navigation.navigate("AddTaskScreen")}
-              >
-              <Text style={{... styles.addButtonLabel, fontFamily : 'kumbhSansBold',}}>+ ADD NEW TASK</Text>
-            </TouchableOpacity>
+            <AddTaskButton 
+              color={this.state.category.color}
+              onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
+            />
           </View>
           <View style={styles.categories}>
               <FlatList
@@ -120,19 +120,10 @@ const styles = StyleSheet.create({
   textMuted: { 
     color: "#d1d9e4", 
     fontSize: 18,
+    fontFamily : 'kumbhSansBold',
   },
   title : {
-    fontSize: 50, 
-  },
-  addButton : {
-    alignSelf: "center",
-    padding : 20,
-    borderRadius : 15,
-    width : '100%',
-  }, 
-  addButtonLabel : {
-    alignSelf : 'center',
-    color : 'white',
-    fontSize : 17,
+    fontSize: 50,
+    fontFamily : 'kumbhSansBold',
   },
 });
