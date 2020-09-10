@@ -1,12 +1,18 @@
 import React from 'react'
 import { FlatList } from 'react-native'
+import { toggleTask } from '../redux/actions'
+import { connect } from 'react-redux'
+import store from '../redux/store'
+
 import Task from './Task'
 import EmptyCategory from './EmptyCategory'
 
-const renderItem = ({item, index, color}) => {
+
+const renderItem = ({item, color, toggle}) => {
 
     const onPressTask = () =>{
-      return
+      toggle({taskId:item.id, category:item.categoryId})
+      console.log(store.getState())
     }
 
     return (
@@ -18,13 +24,19 @@ const renderItem = ({item, index, color}) => {
     )
 }
 
-export default function TaskFlatList({ tasks, color }) {
+function TaskFlatList(props) {
     return(
         <FlatList 
-            data={tasks}
+            data={props.tasks}
             keyExtractor={(item) => ""+item.id}
-            renderItem={({item}) => renderItem({item, color})}
+            renderItem={({item}) => renderItem({
+                item, 
+                color:props.color,
+                toggle:props.toggleTask,
+            })}
             ListEmptyComponent={EmptyCategory}
         />
     )
 }
+
+export default connect(null, {toggleTask : toggleTask})(TaskFlatList)

@@ -4,58 +4,40 @@ import Constants from 'expo-constants'
 import { connect } from 'react-redux'
 
 import TasksFlatList from '../components/TasksFlatList'
-import Task from '../components/Task'
 import CategoryButton from '../components/CategoryButton'
 import AddCategoryButton from '../components/AddCategoryButton'
-import EmptyCategory from '../components/EmptyCategory'
 import AddTaskButton from '../components/AddTaskButton'
 
 class TaskListScreen extends React.Component {
-
-  state = {
-    selectedCategoryId : 1,
-    category : this.props.categories.byIds["1"]
-  }
-
-
-  
 
   renderCategory = ({item}) => {
     return (
       <CategoryButton 
         name={this.props.categories.byIds[item].name} 
         color={this.props.categories.byIds[item].color}
-        selected={item === this.state.selectedCategoryId}
-        onPress={() => {
-          this.setState({
-            selectedCategoryId: item,
-            category: this.props.categories.byIds[item],
-          })
-        }}
+        selected={item === this.props.category.id}
+        onPress={() =>console.log('Not working for now')}
       />
     )
   }
   
   render(){
-
+    
     return (
-
         <View style={styles.container}>
           <View style={styles.tasks}>
             <Text style={styles.textMuted}>CATEGORY</Text>
             <View style={{width:"100%"}}>
               <Text numberOfLines={1} adjustsFontSizeToFit style={styles.title}>
-                {this.state.category.name}
+                {this.props.category.name}
               </Text>
             </View>
-            
             <TasksFlatList 
-              color={this.state.category.color}
-              tasks={this.state.category.tasks}
+              color={this.props.category.color}
+              tasks={this.props.category.tasks}
             />
-            
             <AddTaskButton 
-              color={this.state.category.color}
+              color={this.props.category.color}
               onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
             />
           </View>
@@ -64,7 +46,6 @@ class TaskListScreen extends React.Component {
                 data={this.props.categories.allIds}
                 keyExtractor={(item) => ""+this.props.categories.byIds[item].id}
                 renderItem={this.renderCategory}
-                extraData = {this.state.selectedCategoryId}
               />
               <AddCategoryButton/>
           </View>
@@ -75,6 +56,7 @@ class TaskListScreen extends React.Component {
 
 const mapStateToProps = state => ({
   categories: state.categories,
+  category : state.categories.byIds["1"],
 })
 
 export default connect(mapStateToProps)(TaskListScreen)
