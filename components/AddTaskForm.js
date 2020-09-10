@@ -38,7 +38,7 @@ export default class AddTaskForm extends React.Component{
                     placeholderTextColor="#c5c9d6"
                 />
                 <View style={styles.row}>
-                    <MaterialIcons style={styles.dateIcon} name="date-range" size={26} color="#eda826" />
+                    <MaterialIcons style={styles.dateIcon} name="date-range" size={30} color="#eda826" />
                     <TouchableOpacity style={styles.datePickerButton} onPress={this.showDatePicker}>
                         <Text numberOfLines={1} adjustsFontSizeToFit style={styles.date}>
                             {dateFormat(this.state.date, 'dddd d, mmmm')}
@@ -75,18 +75,19 @@ const styles = StyleSheet.create({
     },
     datePickerButton : {
         justifyContent :'center',
+        marginHorizontal : 20,
     },
     row :{
-        padding : 40,
+        margin : 20,
+        padding : 10,
         flexDirection:'row',
         justifyContent : 'space-between',
     },
     dateIcon : {
         backgroundColor : "#fef5e6",
-        borderRadius : 15,
-        padding : 15,
+        borderRadius : 20,
+        padding : 10,
         flexWrap : 'wrap',
-        margin :5,
     },
     container : {
         paddingVertical : 20,
