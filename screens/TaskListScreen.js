@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import Constants from 'expo-constants'
 import { connect } from 'react-redux'
 
+import TasksFlatList from '../components/TasksFlatList'
 import Task from '../components/Task'
 import CategoryButton from '../components/CategoryButton'
 import AddCategoryButton from '../components/AddCategoryButton'
@@ -17,24 +18,7 @@ class TaskListScreen extends React.Component {
   }
 
 
-  renderTask = ({item, index}) => {
-
-    const onPressTask = () =>{
-      let tasks = this.state.category.tasks
-      tasks[index].done = !this.state.category.tasks[index].done
-      this.setState({
-        category : {... this.state.category, tasks} 
-      })
-    }
-
-    return (
-      <Task 
-        item={item} 
-        color={this.state.category.color} 
-        onPress={onPressTask}
-      />
-    )
-  }
+  
 
   renderCategory = ({item}) => {
     return (
@@ -65,11 +49,9 @@ class TaskListScreen extends React.Component {
               </Text>
             </View>
             
-            <FlatList
-              data={this.state.category.tasks}
-              keyExtractor={(item) => ""+item.id}
-              renderItem={this.renderTask}
-              ListEmptyComponent={EmptyCategory}
+            <TasksFlatList 
+              color={this.state.category.color}
+              tasks={this.state.category.tasks}
             />
             
             <AddTaskButton 

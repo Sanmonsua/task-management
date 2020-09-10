@@ -13,4 +13,14 @@ store.dispatch(
     })
 );
 
+store.dispatch(
+    addTask({
+        id : 1,
+        name: 'Make changes to the new site design',
+        date : '15 sept 2020',
+        done : true,
+        category_id : 1,
+    })
+)
+
 export default store
