@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK } from './actionTypes'
+import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, SELECT_CATEGORY } from './actionTypes'
 
 let newCategoryId = 0 
 
@@ -23,4 +23,9 @@ export const addTask = newTask => ({
 export const toggleTask = task => ({
   type: TOGGLE_TASK,
   payload: task,
+})
+
+export const selectCategory = category =>({
+  type: SELECT_CATEGORY,
+  payload: category,
 })

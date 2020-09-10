@@ -8,21 +8,13 @@ import Task from './Task'
 import EmptyCategory from './EmptyCategory'
 
 
-const renderItem = ({item, color, toggle}) => {
-
-    const onPressTask = () =>{
-      toggle({taskId:item.id, category:item.categoryId})
-      console.log(store.getState())
-    }
-
-    return (
-      <Task 
-        item={item} 
-        color={color} 
-        onPress={onPressTask}
-      />
-    )
-}
+const renderItem = ({item, color, toggle}) => (
+  <Task 
+    item={item} 
+    color={color} 
+    onPress={() => toggle({taskId:item.id, category:item.categoryId})}
+  />
+)
 
 function TaskFlatList(props) {
     return(
@@ -39,4 +31,4 @@ function TaskFlatList(props) {
     )
 }
 
-export default connect(null, {toggleTask : toggleTask})(TaskFlatList)
+export default connect(null, { toggleTask })(TaskFlatList)

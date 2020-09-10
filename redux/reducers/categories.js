@@ -1,4 +1,4 @@
-import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK } from '../actionTypes'
+import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY } from '../actionTypes'
 
 initialState = {
     allIds : [],
@@ -47,6 +47,11 @@ export default function (state=initialState, action) {
                         )
                     }
                 }
+            }
+        case SELECT_CATEGORY:
+            return {
+                ...state,
+                selectedId : action.payload.categoryId,
             }
         default:
             return state
