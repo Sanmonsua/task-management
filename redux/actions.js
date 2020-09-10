@@ -1,11 +1,19 @@
 import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK } from './actionTypes'
 
+let newCategoryId = 0 
 
 // action creators
-export const addCategory = newCategory => ({
-  type: ADD_CATEGORY,
-  payload: newCategory,
-})
+export const addCategory = newCategory => {
+  newCategoryId ++
+  return ({
+      type: ADD_CATEGORY,
+      payload: {
+        ... newCategory, 
+        id : `${newCategoryId}`,
+      },
+    }
+  )
+}
 
 export const addTask = newTask => ({
   type: ADD_TASK,

@@ -3,6 +3,7 @@ import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK } from '../actionTypes'
 initialState = {
     allIds : [],
     byIds : {},
+    selectedId : 0,
 }
 
 export default function (state=initialState, action) {
@@ -30,7 +31,8 @@ export default function (state=initialState, action) {
                 byIds : {
                     ... state.byIds, 
                     [id]:action.payload
-                }
+                },
+                selectedId : state.allIds.length === 0 ? id : state.selectedId,
             }
         case TOGGLE_TASK:
             const { taskId, category } = action.payload

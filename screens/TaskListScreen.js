@@ -13,9 +13,9 @@ class TaskListScreen extends React.Component {
   renderCategory = ({item}) => {
     return (
       <CategoryButton 
-        name={this.props.categories.byIds[item].name} 
-        color={this.props.categories.byIds[item].color}
-        selected={item === this.props.category.id}
+        name={item.name} 
+        color={item.color}
+        selected={item.id === this.props.category.id}
         onPress={() =>console.log('Not working for now')}
       />
     )
@@ -43,8 +43,8 @@ class TaskListScreen extends React.Component {
           </View>
           <View style={styles.categories}>
               <FlatList
-                data={this.props.categories.allIds}
-                keyExtractor={(item) => ""+this.props.categories.byIds[item].id}
+                data={this.props.categories}
+                keyExtractor={(item) => item.id}
                 renderItem={this.renderCategory}
               />
               <AddCategoryButton/>
@@ -55,8 +55,8 @@ class TaskListScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories,
-  category : state.categories.byIds["1"],
+  categories: state.categories.allIds.map(categoryId => state.categories.byIds[categoryId]),
+  category : state.categories.byIds[state.categories.selectedId],
 })
 
 export default connect(mapStateToProps)(TaskListScreen)

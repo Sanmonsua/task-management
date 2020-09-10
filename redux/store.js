@@ -9,18 +9,23 @@ store.dispatch(
         name: "Work",
         color: "#a362ea",
         tasks : [],
-        id: 1,
     })
 );
 
 store.dispatch(
-    addTask({
-        id : 1,
-        name: 'Make changes to the new site design',
-        date : '15 sept 2020',
-        done : true,
-        categoryId : 1,
+    addCategory({
+        name: "Family",
+        color: "#f5a921",
+        tasks : [],
     })
-)
+);
+
+store.dispatch(
+    addCategory({
+        name: "Software Design",
+        color: "#43c8dd",
+        tasks : [],
+    })
+);
 
 export default store
