@@ -2,10 +2,10 @@ import React from 'react'
 import {TouchableOpacity, StyleSheet} from 'react-native'
 import { Octicons } from '@expo/vector-icons'; 
 
-export default function AddCategoryButton () {
+export default function AddCategoryButton ({ onPress }) {
 
     return (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Octicons name="plus" style={styles.text} />
         </TouchableOpacity>
     )

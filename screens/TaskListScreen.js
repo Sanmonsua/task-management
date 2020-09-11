@@ -36,7 +36,7 @@ class TaskListScreen extends React.Component {
                 selectedId={this.props.category.id}
                 categories={this.props.categories}
               />
-              <AddCategoryButton/>
+              <AddCategoryButton onPress={()=>this.props.navigation.navigate('AddCategoryScreen')}/>
           </View>
         </View>
     );

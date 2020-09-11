@@ -10,6 +10,7 @@ export const addCategory = newCategory => {
       payload: {
         ... newCategory, 
         id : `${newCategoryId}`,
+        tasks : [],
       },
     }
   )

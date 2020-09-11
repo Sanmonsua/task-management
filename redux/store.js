@@ -8,7 +8,6 @@ store.dispatch(
     addCategory({
         name: "Work",
         color: "#a362ea",
-        tasks : [],
     })
 );
 
@@ -16,7 +15,6 @@ store.dispatch(
     addCategory({
         name: "Family",
         color: "#f5a921",
-        tasks : [],
     })
 );
 
@@ -24,7 +22,6 @@ store.dispatch(
     addCategory({
         name: "Software Design",
         color: "#43c8dd",
-        tasks : [],
     })
 );
 
