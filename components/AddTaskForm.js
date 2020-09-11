@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
+import { Picker } from '@react-native-community/picker'
 
 const dateFormat = require('dateformat')
 
@@ -11,6 +13,7 @@ export default class AddTaskForm extends React.Component{
         name : "",
         date : new Date(),
         showDatePicker : false,
+        category : this.props.categories[0]
     }
 
     onChangeDate = (event, selectedDate) =>{
@@ -46,6 +49,24 @@ export default class AddTaskForm extends React.Component{
                     </TouchableOpacity>
                     
                 </View>
+                <View style={styles.row}>
+                    <Entypo style={{... styles.categoryIcon, backgroundColor:this.state.category.color+"20"}} name="add-to-list" size={30} color={this.state.category.color} />
+                    <View style={styles.datePickerButton}>
+                        <Picker
+                            selectedValue={this.state.category}
+                            style={{width:"100%", justifyContent:'center'}}
+                            itemStyle={{fontSize:20}}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({category: itemValue})
+                        }>
+                            {this.props.categories.map(category =>(
+                                <Picker.Item label={category.name} value={category}/>
+                            ))}
+                        </Picker>
+                    </View>
+                    
+                </View>
+                
                 
                 {this.state.showDatePicker &&
                     <DateTimePicker
@@ -76,15 +97,21 @@ const styles = StyleSheet.create({
     datePickerButton : {
         justifyContent :'center',
         marginHorizontal : 20,
+        flex:1,
     },
     row :{
-        margin : 20,
+        marginTop:10,
         padding : 10,
         flexDirection:'row',
-        justifyContent : 'space-between',
+        justifyContent : 'space-around',
     },
     dateIcon : {
         backgroundColor : "#fef5e6",
+        borderRadius : 20,
+        padding : 10,
+        flexWrap : 'wrap',
+    },
+    categoryIcon : {
         borderRadius : 20,
         padding : 10,
         flexWrap : 'wrap',
