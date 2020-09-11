@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import TasksFlatList from '../components/TasksFlatList'
 import CategoriesFlatList from '../components/CategoriesFlatList'
 import AddCategoryButton from '../components/AddCategoryButton'
-import AddTaskButton from '../components/AddTaskButton'
+import Button from '../components/Button'
 
 class TaskListScreen extends React.Component {
   
@@ -25,7 +25,8 @@ class TaskListScreen extends React.Component {
               color={this.props.category.color}
               tasks={this.props.category.tasks}
             />
-            <AddTaskButton 
+            <Button
+              title="+ ADD NEW TASK" 
               color={this.props.category.color}
               onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
             />

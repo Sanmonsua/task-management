@@ -1,14 +1,14 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-export default function AddTaskButton (props) {
+export default function Button (props) {
     
     return (
         <TouchableOpacity
             style={{... styles.addButton, backgroundColor: props.color}}
             onPress={props.onPress}
         >
-            <Text style={styles.addButtonLabel}>+ ADD NEW TASK</Text>
+            <Text style={styles.addButtonLabel}>{props.title}</Text>
         </TouchableOpacity>
     )
 }

@@ -5,7 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-community/picker'
-import AddTaskButton from './AddTaskButton'
+import Button from './Button'
 
 import { connect } from 'react-redux'
 import { addTask } from '../redux/actions'
@@ -96,7 +96,11 @@ class AddTaskForm extends React.Component{
                     
                 </View>
                 <View style={{justifyContent:'flex-end', flex:1}}>
-                    <AddTaskButton color="#222429" onPress={this.onAdd}/>
+                    <Button 
+                        title="CREATE TASK"
+                        color="#222429" 
+                        onPress={this.onAdd}
+                    />
                 </View>
                 
                 
