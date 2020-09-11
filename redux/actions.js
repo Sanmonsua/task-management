@@ -1,7 +1,7 @@
 import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, SELECT_CATEGORY } from './actionTypes'
 
 let newCategoryId = 0 
-
+let newTaskId = 0
 // action creators
 export const addCategory = newCategory => {
   newCategoryId ++
@@ -15,11 +15,18 @@ export const addCategory = newCategory => {
   )
 }
 
-export const addTask = newTask => ({
-  type: ADD_TASK,
-  payload: newTask,
-})
-
+export const addTask = newTask => {
+  newTaskId ++
+  return ({
+      type: ADD_TASK,
+      payload: {
+        ...newTask,
+        id : `${newTaskId}`,
+        done : false,
+      },
+    }
+  )
+}
 export const toggleTask = task => ({
   type: TOGGLE_TASK,
   payload: task,

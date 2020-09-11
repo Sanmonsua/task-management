@@ -1,19 +1,30 @@
 import React from 'react'
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import { showMessage } from  'react-native-flash-message'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import { Picker } from '@react-native-community/picker'
+import AddTaskButton from './AddTaskButton'
+
+import { connect } from 'react-redux'
+import { addTask } from '../redux/actions'
 
 const dateFormat = require('dateformat')
 
-export default class AddTaskForm extends React.Component{
+class AddTaskForm extends React.Component{
     
     state = {
         name : "",
         date : new Date(),
         showDatePicker : false,
-        category : this.props.categories[0]
+        category : this.props.selectedCategory,
+    }
+
+    onChangeName = (text) => {
+        this.setState({
+            name : text,
+        })
     }
 
     onChangeDate = (event, selectedDate) =>{
@@ -31,6 +42,24 @@ export default class AddTaskForm extends React.Component{
         })
     }
 
+    onAdd = () => {
+        if (this.state.name.length > 0){
+            this.props.addTask({
+                name : this.state.name,
+                date : dateFormat(this.state.date, 'dd/mm/yy'),
+                categoryId : this.state.category.id,
+            })
+            this.props.onSubmit()
+        } else{
+            showMessage({
+                message: "Opps!",
+                description : "You need to input a task name",
+                type: "danger",
+            })
+        }
+        
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -39,12 +68,13 @@ export default class AddTaskForm extends React.Component{
                     placeholder="Task name"
                     value={this.state.name}
                     placeholderTextColor="#c5c9d6"
+                    onChangeText={this.onChangeName}
                 />
                 <View style={styles.row}>
                     <MaterialIcons style={styles.dateIcon} name="date-range" size={30} color="#eda826" />
                     <TouchableOpacity style={styles.datePickerButton} onPress={this.showDatePicker}>
                         <Text numberOfLines={1} adjustsFontSizeToFit style={styles.date}>
-                            {dateFormat(this.state.date, 'dddd d, mmmm')}
+                            {dateFormat(this.state.date, 'dd/mm/yy')}
                         </Text>
                     </TouchableOpacity>
                     
@@ -55,7 +85,6 @@ export default class AddTaskForm extends React.Component{
                         <Picker
                             selectedValue={this.state.category}
                             style={{width:"100%", justifyContent:'center'}}
-                            itemStyle={{fontSize:20}}
                             onValueChange={(itemValue, itemIndex) =>
                                 this.setState({category: itemValue})
                         }>
@@ -66,6 +95,10 @@ export default class AddTaskForm extends React.Component{
                     </View>
                     
                 </View>
+                <View style={{justifyContent:'flex-end', flex:1}}>
+                    <AddTaskButton color="#222429" onPress={this.onAdd}/>
+                </View>
+                
                 
                 
                 {this.state.showDatePicker &&
@@ -80,6 +113,8 @@ export default class AddTaskForm extends React.Component{
         )
     }
 }
+
+export default connect(null, { addTask })(AddTaskForm)
 
 const styles = StyleSheet.create({
     textField: {
@@ -118,5 +153,6 @@ const styles = StyleSheet.create({
     },
     container : {
         paddingVertical : 20,
+        flex:1,
     }
 })
