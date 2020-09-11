@@ -9,6 +9,7 @@ import * as Font from 'expo-font'
 
 import TaskListScreen from './screens/TaskListScreen'
 import AddTaskScreen from './screens/AddTaskScreen'
+import FlashMessage from "react-native-flash-message"
 
 const Stack = createStackNavigator()
 
@@ -50,10 +51,15 @@ export default class App extends React.Component {
             <Stack.Screen 
               component={AddTaskScreen}
               name="AddTaskScreen"
+              options={{headerShown:false}}
             />
           </Stack.Navigator>
         </NavigationContainer>
-        
+        <FlashMessage 
+          ref="myLocalFlashMessage" 
+          textStyle={{fontFamily:'kumbhSans'}}
+          titleStyle={{fontFamily:'kumbhSansBold'}}
+        />
       </Provider>
       
     );
