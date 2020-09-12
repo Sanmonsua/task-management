@@ -3,24 +3,19 @@ import { View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native
 import { showMessage } from  'react-native-flash-message'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { MaterialIcons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
-import { Picker } from '@react-native-community/picker'
 import Button from './Button'
 
 import { connect } from 'react-redux'
-import { addTask } from '../redux/actions'
+import { editTask } from '../redux/actions'
 
 const dateFormat = require('dateformat')
 
 class EditTaskForm extends React.Component{
-    
-    
 
     state = {
         name : this.props.task.name,
         date : this.props.task.date,
         showDatePicker : false,
-        category : this.props.selectedCategory,
     }
 
     onChangeName = (text) => {
@@ -44,12 +39,13 @@ class EditTaskForm extends React.Component{
         })
     }
 
-    onAdd = () => {
+    onEdit = () => {
         if (this.state.name.length > 0){
-            this.props.addTask({
+            this.props.editTask({
+                id : this.props.task.id,
                 name : this.state.name,
-                date : dateFormat(this.state.date, 'dd/mm/yy'),
-                categoryId : this.state.category.id,
+                date : this.state.date,
+                categoryId : this.props.task.categoryId,
             })
             this.props.onSubmit()
         } else{
@@ -94,36 +90,11 @@ class EditTaskForm extends React.Component{
                     </TouchableOpacity>
                     
                 </View>
-                <View style={styles.row}>
-                    <Entypo 
-                        style={{
-                            ... styles.categoryIcon, 
-                            backgroundColor: this.state.category.color+"20"
-                        }} 
-                        name="add-to-list" 
-                        size={30} 
-                        color={this.state.category.color} 
-                    />
-                    <View style={styles.datePickerButton}>
-                        <Picker
-                            selectedValue={this.state.category}
-                            style={{width:"100%", justifyContent:'center'}}
-                            onValueChange={(itemValue, itemIndex) =>
-                                this.setState({category: itemValue})
-                            }
-                        >
-                            {this.props.categories.map(category => (
-                                <Picker.Item label={category.name} value={category}/>
-                            ))}
-                        </Picker>
-                    </View>
-                    
-                </View>
                 <View style={styles.createButtonHolder}>
                     <Button 
-                        title="CREATE TASK"
+                        title="SAVE"
                         color="#222429" 
-                        onPress={this.onAdd}
+                        onPress={this.onEdit}
                     />
                 </View>
                 
@@ -140,7 +111,7 @@ class EditTaskForm extends React.Component{
     }
 }
 
-export default connect(null, { addTask })(EditTaskForm)
+export default connect(null, { editTask })(EditTaskForm)
 
 const styles = StyleSheet.create({
     textField: {
