@@ -5,7 +5,7 @@ import Constants from 'expo-constants'
 import { connect } from 'react-redux'
 
 import BackButton from '../components/BackButton'
-import AddTaskForm from '../components/AddTaskForm'
+import EditTaskForm from '../components/EditTaskForm'
 
 class EditTaskScreen extends React.Component {
     
@@ -16,10 +16,11 @@ class EditTaskScreen extends React.Component {
                     onPress={()=>this.props.navigation.pop()}
                 />
                 <Text style={styles.title}>
-                    Create{'\n'}New Task
+                    Edit Task
                 </Text>
                 <View style={{flex:1}}>
-                    <AddTaskForm
+                    <EditTaskForm
+                        task={this.props.route.params.item}
                         categories={this.props.categories}
                         selectedCategory={this.props.category}
                         onSubmit={()=>this.props.navigation.pop()}

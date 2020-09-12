@@ -30,7 +30,7 @@ class TaskListScreen extends React.Component {
             <TasksFlatList 
               color={this.props.category.color}
               tasks={this.props.category.tasks}
-              onPress={()=>this.props.navigation.navigate('EditTaskScreen')}
+              navigation={this.props.navigation}
             />
             <Button
               title="+ ADD NEW TASK" 

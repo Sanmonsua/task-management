@@ -2,6 +2,8 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
+const dateFormat = require('dateformat')
+
 export const Task = ({item, color, onPress, onToggle}) => (
     <TouchableOpacity
         onPress={onPress}
@@ -23,7 +25,7 @@ export const Task = ({item, color, onPress, onToggle}) => (
         
         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
             <Text style={styles.taskDate}>
-                {item.date.toUpperCase()}
+                {dateFormat(item.date, 'dd/mm/yy')}
             </Text>
             {item.done 
                 ? <Text style={{... styles.taskDate, color:color}}>

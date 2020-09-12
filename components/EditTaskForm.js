@@ -12,11 +12,13 @@ import { addTask } from '../redux/actions'
 
 const dateFormat = require('dateformat')
 
-class AddTaskForm extends React.Component{
+class EditTaskForm extends React.Component{
     
+    
+
     state = {
-        name : "",
-        date : new Date(),
+        name : this.props.task.name,
+        date : this.props.task.date,
         showDatePicker : false,
         category : this.props.selectedCategory,
     }
@@ -46,7 +48,7 @@ class AddTaskForm extends React.Component{
         if (this.state.name.length > 0){
             this.props.addTask({
                 name : this.state.name,
-                date : this.state.date,
+                date : dateFormat(this.state.date, 'dd/mm/yy'),
                 categoryId : this.state.category.id,
             })
             this.props.onSubmit()
@@ -61,6 +63,7 @@ class AddTaskForm extends React.Component{
     }
 
     render() {
+
         return (
             <View style={styles.container}>
                 <TextInput
@@ -137,7 +140,7 @@ class AddTaskForm extends React.Component{
     }
 }
 
-export default connect(null, { addTask })(AddTaskForm)
+export default connect(null, { addTask })(EditTaskForm)
 
 const styles = StyleSheet.create({
     textField: {
