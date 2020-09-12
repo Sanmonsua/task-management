@@ -23,6 +23,6 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "In this project I have developed an app for tasks management using redux.",
-    "githubUrl": "https://github.com/Sanmonsua/task-management/settings"
+    "githubUrl": "https://github.com/Sanmonsua/task-management/"
   }
 }
