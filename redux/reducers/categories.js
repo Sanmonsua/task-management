@@ -1,4 +1,4 @@
-import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY } from '../actionTypes'
+import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY, EDIT_TASK } from '../actionTypes'
 
 initialState = {
     allIds : [],
@@ -48,6 +48,23 @@ export default function (state=initialState, action) {
                     }
                 }
             }
+        case EDIT_TASK:
+            return ({
+                ...state,
+                byIds : {
+                    ...state.byIds,
+                    [action.payload.categoryId]:{
+                        ...state.byIds[action.payload.categoryId],
+                        tasks : state.byIds[action.payload.categoryId].tasks.map(
+                            task => task.id === action.payload.id 
+                                ? {...task, name:action.payload.name, date:action.payload.date} 
+                                : task 
+                        )
+                    }
+                }
+            }
+                
+            )
         case SELECT_CATEGORY:
             return {
                 ...state,
