@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import rootReducer from "./reducers";
-import { addCategory, addTask } from "./actions";
+import { addCategory } from "./actions";
 
 const store = createStore(rootReducer);
 
@@ -8,20 +8,6 @@ store.dispatch(
     addCategory({
         name: "Work",
         color: "#a362ea",
-    })
-);
-
-store.dispatch(
-    addCategory({
-        name: "Family",
-        color: "#f5a921",
-    })
-);
-
-store.dispatch(
-    addCategory({
-        name: "Software Design",
-        color: "#43c8dd",
     })
 );
 
