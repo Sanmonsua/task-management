@@ -7,11 +7,12 @@ import Task from './Task'
 import EmptyCategory from './EmptyCategory'
 
 
-const renderItem = ({item, color, toggle}) => (
+const renderItem = ({item, color, toggle, onPress}) => (
   <Task 
     item={item} 
     color={color} 
-    onPress={() => toggle({taskId:item.id, category:item.categoryId})}
+    onToggle={() => toggle({taskId:item.id, category:item.categoryId})}
+    onPress={onPress}
   />
 )
 
@@ -24,6 +25,7 @@ function TaskFlatList(props) {
                 item, 
                 color:props.color,
                 toggle:props.toggleTask,
+                onPress:props.onPress,
             })}
             ListEmptyComponent={EmptyCategory}
         />
