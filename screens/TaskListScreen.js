@@ -15,9 +15,15 @@ class TaskListScreen extends React.Component {
     return (
         <View style={styles.container}>
           <View style={styles.tasks}>
-            <Text style={styles.textMuted}>CATEGORY</Text>
+            <Text style={styles.textMuted}>
+              CATEGORY
+            </Text>
             <View style={{width:"100%"}}>
-              <Text numberOfLines={1} adjustsFontSizeToFit style={styles.title}>
+              <Text 
+                numberOfLines={1} 
+                adjustsFontSizeToFit 
+                style={styles.title}
+              >
                 {this.props.category.name}
               </Text>
             </View>
@@ -36,7 +42,9 @@ class TaskListScreen extends React.Component {
                 selectedId={this.props.category.id}
                 categories={this.props.categories}
               />
-              <AddCategoryButton onPress={()=>this.props.navigation.navigate('AddCategoryScreen')}/>
+              <AddCategoryButton 
+                onPress={()=>this.props.navigation.navigate('AddCategoryScreen')}
+              />
           </View>
         </View>
     );
@@ -44,7 +52,8 @@ class TaskListScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories.allIds.map(categoryId => state.categories.byIds[categoryId]),
+  categories: state.categories.allIds.map(
+    categoryId => state.categories.byIds[categoryId]),
   category : state.categories.byIds[state.categories.selectedId],
 })
 

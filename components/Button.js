@@ -5,10 +5,15 @@ export default function Button (props) {
     
     return (
         <TouchableOpacity
-            style={{... styles.addButton, backgroundColor: props.color}}
+            style={{
+                ... styles.addButton, 
+                backgroundColor: props.color
+            }}
             onPress={props.onPress}
         >
-            <Text style={styles.addButtonLabel}>{props.title}</Text>
+            <Text style={styles.addButtonLabel}>
+                {props.title}
+            </Text>
         </TouchableOpacity>
     )
 }

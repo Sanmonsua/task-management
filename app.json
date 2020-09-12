@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "tasks",
-    "slug": "tasks",
+    "name": "Tasks-io",
+    "slug": "tasks-io",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "In this project I have developed an app for tasks management using redux.",
+    "githubUrl": "https://github.com/Sanmonsua/task-management/settings"
   }
 }

@@ -1,14 +1,27 @@
 import React from 'react'
 import {TouchableOpacity, Text, StyleSheet} from 'react-native'
 
-const CategoryButton = ({name, color, onPress, selected}) =>{
+const CategoryButton = (props) =>{
     
-    const backgroundColor = selected ? color : "#353943"
-    const textColor = selected ? 'white' : color
+    const backgroundColor = props.selected ? props.color : "#353943"
+    const textColor = props.selected ? 'white' : props.color
 
     return (
-        <TouchableOpacity onPress={onPress} style={{... styles.button, backgroundColor}}>
-            <Text style={{... styles.text, color : textColor}}>{name.charAt()}</Text>
+        <TouchableOpacity 
+            onPress={props.onPress} 
+            style={{
+                ... styles.button, 
+                backgroundColor
+            }}
+        >
+            <Text 
+                style={{
+                    ... styles.text, 
+                    color : textColor
+                }}
+            >
+                {props.name.charAt()}
+            </Text>
         </TouchableOpacity>
     )
     

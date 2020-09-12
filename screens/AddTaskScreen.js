@@ -32,7 +32,8 @@ class AddTaskScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    categories: state.categories.allIds.map(categoryId => state.categories.byIds[categoryId]),
+    categories: state.categories.allIds.map(
+        categoryId => state.categories.byIds[categoryId]),
     category : state.categories.byIds[state.categories.selectedId],
 })
   

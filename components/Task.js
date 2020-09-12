@@ -3,7 +3,10 @@ import {TouchableOpacity, Text, StyleSheet, View} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
 
 export const Task = ({item, color, onPress}) => (
-    <TouchableOpacity onPress={onPress} style={styles.taskContainer}>
+    <TouchableOpacity 
+        onPress={onPress} 
+        style={styles.taskContainer}
+    >
         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
             <Text style={styles.taskName}>
                 {item.name}

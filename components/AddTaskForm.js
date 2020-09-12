@@ -71,39 +71,58 @@ class AddTaskForm extends React.Component{
                     onChangeText={this.onChangeName}
                 />
                 <View style={styles.row}>
-                    <MaterialIcons style={styles.dateIcon} name="date-range" size={30} color="#eda826" />
-                    <TouchableOpacity style={styles.datePickerButton} onPress={this.showDatePicker}>
-                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.date}>
+                    <MaterialIcons 
+                        style={styles.dateIcon} 
+                        name="date-range" 
+                        size={30} 
+                        color="#eda826" 
+                    />
+                    <TouchableOpacity 
+                        style={styles.datePickerButton} 
+                        onPress={this.showDatePicker}
+                    >
+                        <Text 
+                            numberOfLines={1} 
+                            adjustsFontSizeToFit 
+                            style={styles.date}
+                        >
                             {dateFormat(this.state.date, 'dd/mm/yy')}
                         </Text>
                     </TouchableOpacity>
                     
                 </View>
                 <View style={styles.row}>
-                    <Entypo style={{... styles.categoryIcon, backgroundColor:this.state.category.color+"20"}} name="add-to-list" size={30} color={this.state.category.color} />
+                    <Entypo 
+                        style={{
+                            ... styles.categoryIcon, 
+                            backgroundColor: this.state.category.color+"20"
+                        }} 
+                        name="add-to-list" 
+                        size={30} 
+                        color={this.state.category.color} 
+                    />
                     <View style={styles.datePickerButton}>
                         <Picker
                             selectedValue={this.state.category}
                             style={{width:"100%", justifyContent:'center'}}
                             onValueChange={(itemValue, itemIndex) =>
                                 this.setState({category: itemValue})
-                        }>
-                            {this.props.categories.map(category =>(
+                            }
+                        >
+                            {this.props.categories.map(category => (
                                 <Picker.Item label={category.name} value={category}/>
                             ))}
                         </Picker>
                     </View>
                     
                 </View>
-                <View style={{justifyContent:'flex-end', flex:1}}>
+                <View style={styles.createButtonHolder}>
                     <Button 
                         title="CREATE TASK"
                         color="#222429" 
                         onPress={this.onAdd}
                     />
                 </View>
-                
-                
                 
                 {this.state.showDatePicker &&
                     <DateTimePicker
@@ -154,6 +173,10 @@ const styles = StyleSheet.create({
         borderRadius : 20,
         padding : 10,
         flexWrap : 'wrap',
+    },
+    createButtonHolder : {
+        justifyContent :  'flex-end', 
+        flex : 1
     },
     container : {
         paddingVertical : 20,

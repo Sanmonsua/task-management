@@ -10,9 +10,7 @@ import Button from './Button'
 import { connect } from 'react-redux'
 import { addCategory } from '../redux/actions'
 
-const dateFormat = require('dateformat')
-
-class AddTaskForm extends React.Component{
+class AddCategoryForm extends React.Component{
     
     state = {
         name : "",
@@ -50,30 +48,36 @@ class AddTaskForm extends React.Component{
                     onChangeText={this.onChangeName}
                 />
                 <View style={styles.row}>
-                    <Ionicons style={{... styles.iconHolder, backgroundColor:`${this.state.color}30`}} name="ios-color-fill" size={30} color={`${this.state.color}`} />
+                    <Ionicons 
+                        style={{
+                            ... styles.iconHolder, 
+                            backgroundColor:`${this.state.color}30`
+                            }} 
+                        name="ios-color-fill" 
+                        size={30} 
+                        color={this.state.color} 
+                    />
                     <View style={styles.pickerButton}>
                         <Picker
                             selectedValue={this.state.color}
                             style={{width:"100%", justifyContent:'center'}}
                             onValueChange={(itemValue, itemIndex) =>
                                 this.setState({color: itemValue})
-                        }>
+                            }
+                        >
                             {colors.map(color =>(
                                 <Picker.Item label={color.name} value={color.code}/>
                             ))}
                         </Picker>
-                    </View>
-                    
+                    </View> 
                 </View>
-                <View style={{justifyContent:'flex-end', flex:1}}>
+                <View style={styles.createButtonHolder}>
                     <Button 
                         title="CREATE CATEGORY"
                         color="#222429" 
                         onPress={this.onAdd}
                     />
                 </View>
-                
-                
                 
                 {this.state.showDatePicker &&
                     <DateTimePicker
@@ -88,7 +92,7 @@ class AddTaskForm extends React.Component{
     }
 }
 
-export default connect(null, { addCategory })(AddTaskForm)
+export default connect(null, { addCategory })(AddCategoryForm)
 
 const styles = StyleSheet.create({
     textField: {
@@ -118,6 +122,10 @@ const styles = StyleSheet.create({
         borderRadius : 20,
         padding : 15,
         flexWrap : 'wrap',
+    },
+    createButtonHolder : {
+        justifyContent :  'flex-end', 
+        flex : 1
     },
     container : {
         paddingVertical : 20,
