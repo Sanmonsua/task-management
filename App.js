@@ -2,7 +2,8 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import { store, persistor } from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font'
@@ -43,35 +44,38 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen 
-              component={TaskListScreen} 
-              name="TasksListScreen"
-              options={{headerShown:false}}
-            />
-            <Stack.Screen 
-              component={AddTaskScreen}
-              name="AddTaskScreen"
-              options={{headerShown:false}}
-            />
-            <Stack.Screen 
-              component={EditTaskScreen}
-              name="EditTaskScreen"
-              options={{headerShown:false}}
-            />
-            <Stack.Screen 
-              component={AddCategoryScreen}
-              name="AddCategoryScreen"
-              options={{headerShown:false}}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-        <FlashMessage 
-          ref="myLocalFlashMessage" 
-          textStyle={{fontFamily:'kumbhSans'}}
-          titleStyle={{fontFamily:'kumbhSansBold'}}
-        />
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen 
+                component={TaskListScreen} 
+                name="TasksListScreen"
+                options={{headerShown:false}}
+              />
+              <Stack.Screen 
+                component={AddTaskScreen}
+                name="AddTaskScreen"
+                options={{headerShown:false}}
+              />
+              <Stack.Screen 
+                component={EditTaskScreen}
+                name="EditTaskScreen"
+                options={{headerShown:false}}
+              />
+              <Stack.Screen 
+                component={AddCategoryScreen}
+                name="AddCategoryScreen"
+                options={{headerShown:false}}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+          <FlashMessage 
+            ref="myLocalFlashMessage" 
+            textStyle={{fontFamily:'kumbhSans'}}
+            titleStyle={{fontFamily:'kumbhSansBold'}}
+          />
+        </PersistGate>
+        
       </Provider>
       
     );
