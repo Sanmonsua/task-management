@@ -10,10 +10,12 @@ export default function (state=initialState, action) {
     switch (action.type){
         case FETCH_CATEGORIES :
             const { categories } = action.payload
+            console.log(state)
             return {
                 ... state,
                 allIds: categories.byIds.map(c => c.id),
-                byIds: { ... categories.byIds },
+                byIds: {... categories.byIds.map(c => ({... c, tasks:[]}))},
+                selectedId: categories.byIds[0].id
             }
         case ADD_TASK :
             const { categoryId } = action.payload

@@ -23,7 +23,7 @@ class TaskListScreen extends React.Component {
   }
   
   render(){
-
+    console.log(this.props)
     if (!this.state.isReady){
       this.fetchData()
       return <View></View>
@@ -72,6 +72,7 @@ const mapStateToProps = state => ({
   categories: state.categories.allIds.map(
     categoryId => state.categories.byIds[categoryId]),
   category : state.categories.byIds[state.categories.selectedId],
+  selectedId : state.categories.selectedId
 })
 
 export default connect(mapStateToProps, { fetchCategories })(TaskListScreen)

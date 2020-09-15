@@ -1,5 +1,5 @@
 import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, EDIT_TASK, SELECT_CATEGORY, FETCH_CATEGORIES } from './actionTypes'
-import firebaseApp from '../firebase'
+import {firebaseApp} from '../firebase'
 
 let newCategoryId = 0 
 let newTaskId = 0
@@ -48,7 +48,9 @@ export const selectCategory = category =>({
 })
 
 export const fetchCategories = () => dispatch => {
-  firebaseApp.database().ref('categories').on('value', snap =>{
+  
+  firebaseApp.database().ref('/categories').on('value', snap =>{
+    
     dispatch({
       type: FETCH_CATEGORIES,
       payload: {categories : snap.val()},
