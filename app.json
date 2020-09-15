@@ -17,12 +17,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sanmonsua.tasksrn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "description": "In this project I have developed an app for tasks management using redux.",
-    "githubUrl": "https://github.com/Sanmonsua/task-management/"
+    "githubUrl": "https://github.com/Sanmonsua/task-management/",
+    "android": {
+      "package": "com.sanmonsua.tasksrn"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk"
 import rootReducer from "./reducers";
-import { addCategory } from "./actions";
+import { fetchCategories } from "./actions";
 
 import { persistStore, persistReducer } from 'redux-persist'
 
@@ -12,13 +13,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export const store = createStore(persistedReducer)
+export const store = createStore(persistedReducer, applyMiddleware(thunk))
 export const persistor = persistStore(store)
 
-store.dispatch(
-    addCategory({
-        name: "Work",
-        color: "#a362ea",
-    })
-);
-
+store.dispatch(fetchCategories())

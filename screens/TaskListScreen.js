@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Constants from 'expo-constants'
+
+import { fetchCategories } from '../redux/actions'
 import { connect } from 'react-redux'
 
 import TasksFlatList from '../components/TasksFlatList'
@@ -9,9 +11,23 @@ import AddCategoryButton from '../components/AddCategoryButton'
 import Button from '../components/Button'
 
 class TaskListScreen extends React.Component {
+  state = {
+    isReady: false,
+  }
+
+  fetchData = () => {
+    this.props.fetchCategories()
+    this.setState(
+      { isReady:true }
+    )
+  }
   
   render(){
-    
+
+    if (!this.state.isReady){
+      this.fetchData()
+      return <View></View>
+    }
     return (
         <View style={styles.container}>
           <View style={styles.tasks}>
@@ -58,7 +74,7 @@ const mapStateToProps = state => ({
   category : state.categories.byIds[state.categories.selectedId],
 })
 
-export default connect(mapStateToProps)(TaskListScreen)
+export default connect(mapStateToProps, { fetchCategories })(TaskListScreen)
 
 const styles = StyleSheet.create({
   container: {
