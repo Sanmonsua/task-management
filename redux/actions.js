@@ -1,5 +1,5 @@
 import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, EDIT_TASK, SELECT_CATEGORY, FETCH_CATEGORIES } from './actionTypes'
-import { firebaseApp } from '../firebase'
+import firebaseApp from '../firebase'
 
 let newCategoryId = 0 
 let newTaskId = 0
