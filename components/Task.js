@@ -25,7 +25,7 @@ export const Task = ({item, color, onPress, onToggle}) => (
         
         <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
             <Text style={styles.taskDate}>
-                {dateFormat(item.date, 'dd/mm/yy')}
+                {item.date}
             </Text>
             {item.done 
                 ? <Text style={{... styles.taskDate, color:color}}>

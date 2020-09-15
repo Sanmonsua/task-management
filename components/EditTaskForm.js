@@ -14,7 +14,7 @@ class EditTaskForm extends React.Component{
 
     state = {
         name : this.props.task.name,
-        date : this.props.task.date,
+        date : new Date(`${this.props.task.date}T06:00:00.000`),
         showDatePicker : false,
     }
 
@@ -44,7 +44,7 @@ class EditTaskForm extends React.Component{
             this.props.editTask({
                 id : this.props.task.id,
                 name : this.state.name,
-                date : this.state.date,
+                date : dateFormat(this.state.date, 'yyyy-mm-dd'),
                 categoryId : this.props.task.categoryId,
             })
             this.props.onSubmit()

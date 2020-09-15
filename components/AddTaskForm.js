@@ -46,7 +46,7 @@ class AddTaskForm extends React.Component{
         if (this.state.name.length > 0){
             this.props.addTask({
                 name : this.state.name,
-                date : this.state.date,
+                date : dateFormat(this.state.date, 'yyyy-mm-dd'),
                 categoryId : this.state.category.id,
             })
             this.props.onSubmit()
