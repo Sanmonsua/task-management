@@ -17,3 +17,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = createStore(persistedReducer, applyMiddleware(thunk))
 export const persistor = persistStore(store)
 
+
+const fromStore = (state, db) => {
+  db.ref('categories/byIds').set(state.categories.byIds);
+}
+
+store.subscribe(() => fromStore(store.getState(), firebaseApp.database()))

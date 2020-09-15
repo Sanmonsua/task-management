@@ -23,7 +23,6 @@ class TaskListScreen extends React.Component {
   }
   
   render(){
-    console.log(this.props)
     if (!this.state.isReady){
       this.fetchData()
       return <View></View>
