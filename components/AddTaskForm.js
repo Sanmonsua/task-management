@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { View, TextInput, StyleSheet, Text, TouchableOpacity} from 'react-native'
 import { showMessage } from  'react-native-flash-message'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -11,6 +12,7 @@ import { connect } from 'react-redux'
 import { addTask } from '../redux/actions'
 
 const dateFormat = require('dateformat')
+
 
 class AddTaskForm extends React.Component{
     

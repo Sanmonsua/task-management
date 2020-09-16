@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { View, TextInput, StyleSheet } from 'react-native'
 import { showMessage } from  'react-native-flash-message'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -9,6 +10,7 @@ import Button from './Button'
 
 import { connect } from 'react-redux'
 import { addCategory } from '../redux/actions'
+
 
 class AddCategoryForm extends React.Component{
     

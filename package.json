@@ -26,6 +26,7 @@
     "expo-status-bar": "^1.0.2",
     "expo-updates": "~0.2.10",
     "firebase": "^7.20.0",
+    "prop-types": "^15.7.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "~0.62.2",
@@ -45,9 +46,11 @@
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "babel-jest": "~25.2.6",
+    "babel-preset-expo": "~8.1.0",
+    "eslint": "^7.9.0",
+    "eslint-plugin-react": "^7.20.6",
     "jest": "~25.2.6",
-    "react-test-renderer": "~16.11.0",
-    "babel-preset-expo": "~8.1.0"
+    "react-test-renderer": "~16.11.0"
   },
   "private": true,
   "name": "tasks",
