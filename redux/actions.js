@@ -10,7 +10,6 @@ export const addCategory = newCategory => {
       type: ADD_CATEGORY,
       payload: {
         ... newCategory, 
-        id : `${newCategoryId}`,
         tasks : [],
       },
     }
@@ -23,7 +22,6 @@ export const addTask = newTask => {
       type: ADD_TASK,
       payload: {
         ...newTask,
-        id : `${newTaskId}`,
         done : false,
       },
     }

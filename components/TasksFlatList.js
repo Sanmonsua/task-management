@@ -26,7 +26,7 @@ function TaskFlatList(props) {
     return(
         <FlatList 
             data={props.tasks}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => ""+index}
             renderItem={({item}) => renderItem({
                 item, 
                 color:props.color,

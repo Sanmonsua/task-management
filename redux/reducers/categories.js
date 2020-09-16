@@ -4,6 +4,7 @@ initialState = {
     allIds : [],
     byIds : {},
     selectedId : "0",
+    newId : 0,
 }
 
 export default function (state=initialState, action) {
@@ -14,6 +15,8 @@ export default function (state=initialState, action) {
                 ... state,
                 allIds: categories.byIds.map(c => c.id),
                 byIds: {... categories.byIds},
+                selectedId : +state.selectedId >= categories.byIds.length ? "0" : state.selectedId,
+                newId: `${categories.byIds.length}`
             }
         case ADD_TASK :
             const { categoryId } = action.payload
@@ -31,15 +34,16 @@ export default function (state=initialState, action) {
                     } 
                 }
         case ADD_CATEGORY :
-            const { id } = action.payload
+            
             return {
                 ...state,
-                allIds : [ ...state.allIds, id ],
                 byIds : {
                     ... state.byIds, 
-                    [id]:action.payload
+                    [state.newId]:{... action.payload, id : state.newId}
                 },
-                selectedId : state.allIds.length === 0 ? id : state.selectedId,
+                allIds : [ ...state.allIds, state.newId ],
+                selectedId : state.newId,
+                newId : `${+state.newId++}`
             }
         case TOGGLE_TASK:
             const { taskId, category } = action.payload
