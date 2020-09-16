@@ -11,12 +11,13 @@ export default function (state=initialState, action) {
     switch (action.type){
         case FETCH_CATEGORIES :
             const { categories } = action.payload
+            console.log(categories)
             return {
                 ... state,
-                allIds: categories.byIds.map(c => c.id),
-                byIds: {... categories.byIds},
-                selectedId : +state.selectedId >= categories.byIds.length ? "0" : state.selectedId,
-                newId: `${categories.byIds.length}`
+                allIds: categories.map(c => c.id),
+                byIds: {... categories},
+                selectedId : +state.selectedId >= categories.length ? "0" : state.selectedId,
+                newId: `${categories.length}`
             }
         case ADD_TASK :
             const { categoryId } = action.payload

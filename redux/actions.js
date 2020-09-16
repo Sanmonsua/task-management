@@ -47,7 +47,7 @@ export const selectCategory = category =>({
 
 export const fetchCategories = () => dispatch => {
   
-  firebaseApp.database().ref('/categories').on('value', snap =>{
+  const ref = firebaseApp.database().ref('categories/sdfhdfh').on('value', snap =>{
     
     dispatch({
       type: FETCH_CATEGORIES,

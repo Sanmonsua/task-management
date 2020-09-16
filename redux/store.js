@@ -19,7 +19,7 @@ export const persistor = persistStore(store)
 
 
 const fromStore = (state, db) => {
-  db.ref('categories/byIds').set(state.categories.byIds)
+  db.ref('categories/sdfhdfh').set(state.categories.byIds)
 }
 
 export const onChangeStore = () => {

@@ -12,6 +12,8 @@ import TaskListScreen from './screens/TaskListScreen'
 import AddTaskScreen from './screens/AddTaskScreen'
 import AddCategoryScreen from './screens/AddCategoryScreen'
 import EditTaskScreen from './screens/EditTaskScreen'
+import AuthScreen from './screens/AuthScreen'
+
 import FlashMessage from "react-native-flash-message"
 
 const Stack = createStackNavigator()
@@ -46,7 +48,12 @@ export default class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="AuthScreen">
+              <Stack.Screen
+                component={AuthScreen}
+                name="AuthScreen"
+        
+              />
               <Stack.Screen 
                 component={TaskListScreen} 
                 name="TasksListScreen"

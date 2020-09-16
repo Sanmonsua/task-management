@@ -18,7 +18,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sanmonsua.tasksrn"
+      "bundleIdentifier": "com.sanmonsua.tasksrn",
+      "config":{
+        "googleSignIn":{
+          "reservedClientId":"com.googleusercontent.apps.948857622296-j32kb6pgeapsmp46ejc6fl3s1lm9hn44"
+        }
+      },
+      "googleServicesFile":"./GoogleService-Info.plist"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -26,7 +32,8 @@
     "description": "In this project I have developed an app for tasks management using redux.",
     "githubUrl": "https://github.com/Sanmonsua/task-management/",
     "android": {
-      "package": "com.sanmonsua.tasksrn"
+      "package": "com.sanmonsua.tasksrn",
+      "googleServicesFile":"./google-services.json"
     },
     "entryPoint": "node_modules/expo/AppEntry.js"
   }
