@@ -19,7 +19,9 @@ export const persistor = persistStore(store)
 
 
 const fromStore = (state, db) => {
-  db.ref('categories/byIds').set(state.categories.byIds);
+  db.ref('categories/byIds').set(state.categories.byIds)
 }
 
-store.subscribe(() => fromStore(store.getState(), firebaseApp.database()))
+export const onChangeStore = () => {
+  store.subscribe(() => fromStore(store.getState(), firebaseApp.database()))
+}

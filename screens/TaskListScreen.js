@@ -4,6 +4,7 @@ import Constants from 'expo-constants'
 
 import { fetchCategories } from '../redux/actions'
 import { connect } from 'react-redux'
+import { onChangeStore } from '../redux/store'
 
 import TasksFlatList from '../components/TasksFlatList'
 import CategoriesFlatList from '../components/CategoriesFlatList'
@@ -15,11 +16,12 @@ class TaskListScreen extends React.Component {
     isReady: false,
   }
 
-  fetchData = () => {
-    this.props.fetchCategories()
+  fetchData = async() => {
+    await this.props.fetchCategories()
     this.setState(
       { isReady:true }
     )
+    onChangeStore()
   }
   
   render(){
@@ -27,6 +29,7 @@ class TaskListScreen extends React.Component {
       this.fetchData()
       return <View></View>
     }
+    
     return (
         <View style={styles.container}>
           <View style={styles.tasks}>
