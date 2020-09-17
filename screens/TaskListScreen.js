@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Constants from 'expo-constants'
 
 import { connect } from 'react-redux'
 
+import { Feather } from '@expo/vector-icons' 
 import TasksFlatList from '../components/TasksFlatList'
 import CategoriesFlatList from '../components/CategoriesFlatList'
 import AddCategoryButton from '../components/AddCategoryButton'
@@ -21,7 +22,7 @@ class TaskListScreen extends React.Component {
 					<Text style={styles.textMuted}>
               CATEGORY
 					</Text>
-					<View style={{width:'100%'}}>
+					<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
 						<Text 
 							numberOfLines={1} 
 							adjustsFontSizeToFit 
@@ -29,6 +30,9 @@ class TaskListScreen extends React.Component {
 						>
 							{this.props.category.name}
 						</Text>
+						<TouchableOpacity>
+							<Feather name="edit-3" size={24} color="black" />
+						</TouchableOpacity>
 					</View>
 					<TasksFlatList 
 						color={this.props.category.color}
