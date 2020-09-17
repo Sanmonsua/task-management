@@ -2,19 +2,27 @@ import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY, EDIT_TASK, FETCH_
 
 const initialState = {
 	allIds : [],
-	byIds : {},
+	byIds : {
+		'0' : {
+			color:'#f55c33',
+			name:'Work',
+			id:'0',
+			tasks:[],
+		}
+	},
 	selectedId : '0',
-	newId : 0,
+	newId : 1,
 }
 
 export default function (state=initialState, action) {
 	switch (action.type){
 	case FETCH_CATEGORIES : {
 		const { categories } = action.payload
+		if (!categories) return {... state}
 		return {
 			... state,
 			allIds: categories.map(c => c.id),
-			byIds: {... categories},
+			byIds: {...state.byIds, ... categories},
 			selectedId : +state.selectedId >= categories.length ? '0' : state.selectedId,
 			newId: `${categories.length}`
 		}

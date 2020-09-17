@@ -1,7 +1,12 @@
-import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, EDIT_TASK, SELECT_CATEGORY, FETCH_CATEGORIES } from './actionTypes'
+import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, EDIT_TASK, SELECT_CATEGORY, FETCH_CATEGORIES, SIGN_IN } from './actionTypes'
 import {firebaseApp} from '../firebase'
 
 // action creators
+export const signIn = user => ({
+	type : SIGN_IN,
+	payload : user,
+})
+
 export const addCategory = newCategory => ({
 	type: ADD_CATEGORY,
 	payload: {
@@ -9,7 +14,6 @@ export const addCategory = newCategory => ({
 		tasks : [],
 	},
 })
-
 
 export const addTask = newTask => ({
 	type: ADD_TASK,
@@ -34,12 +38,14 @@ export const selectCategory = category =>({
 	payload: category,
 })
 
-export const fetchCategories = () => dispatch => {
-  
-	firebaseApp.database().ref('categories/sdfhdfh').on('value', snap =>{
-		dispatch({
-			type: FETCH_CATEGORIES,
-			payload: {categories : snap.val()},
-		})
+export const fetchCategories = ({uid}) => dispatch => {
+	
+	firebaseApp.database().ref(`categories/${uid}`).on('value', snap =>{
+		if (snap){
+			dispatch({
+				type: FETCH_CATEGORIES,
+				payload: {categories : snap.val()},
+			})
+		}
 	})
 }

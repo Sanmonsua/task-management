@@ -4,9 +4,10 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import * as GoogleSignIn from 'expo-google-sign-in'
+import { signIn } from '../redux/actions'
+import { connect } from 'react-redux'
 
-
-export default class AuthScreen extends React.Component {
+class AuthScreen extends React.Component {
   state = { 
     user: null,
   }
@@ -22,12 +23,15 @@ export default class AuthScreen extends React.Component {
 
   _syncUserWithStateAsync = async () => {
     const user = await GoogleSignIn.signInSilentlyAsync()
-    this.props.navigation.navigate('TasksListScreen')
+    if (user){
+      this.props.signIn({ user })
+      this.props.navigation.navigate('TasksListScreen')
+    }
   }
 
   signOutAsync = async () => {
     await GoogleSignIn.signOutAsync();
-    this.setState({ user: null, displayName:'' })
+    this.setState({ user: null })
   }
 
   signInAsync = async () => {
@@ -72,6 +76,8 @@ export default class AuthScreen extends React.Component {
       )
   }
 }
+
+export default connect(null, { signIn })(AuthScreen)
 
 const styles = StyleSheet.create({
   container: {

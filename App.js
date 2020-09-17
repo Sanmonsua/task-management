@@ -52,7 +52,7 @@ export default class App extends React.Component {
               <Stack.Screen
                 component={AuthScreen}
                 name="AuthScreen"
-        
+                options={{headerShown:false}}
               />
               <Stack.Screen 
                 component={TaskListScreen} 

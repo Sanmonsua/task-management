@@ -17,7 +17,7 @@ class TaskListScreen extends React.Component {
   }
 
   fetchData = async() => {
-    await this.props.fetchCategories()
+    await this.props.fetchCategories({ uid : this.props.uid })
     this.setState(
       { isReady:true }
     )
@@ -74,7 +74,8 @@ const mapStateToProps = state => ({
   categories: state.categories.allIds.map(
     categoryId => state.categories.byIds[categoryId]),
   category : state.categories.byIds[state.categories.selectedId],
-  selectedId : state.categories.selectedId
+  selectedId : state.categories.selectedId,
+  uid : state.user.uid,
 })
 
 export default connect(mapStateToProps, { fetchCategories })(TaskListScreen)
