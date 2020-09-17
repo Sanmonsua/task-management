@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import * as GoogleSignIn from 'expo-google-sign-in'
@@ -24,7 +24,7 @@ class AuthScreen extends React.Component {
   _syncUserWithStateAsync = async () => {
     const user = await GoogleSignIn.signInSilentlyAsync()
     if (user){
-      this.props.signIn({ user })
+      await this.props.signIn({ user })
       this.props.navigation.navigate('LoadingScreen')
     }
   }
@@ -55,6 +55,14 @@ class AuthScreen extends React.Component {
   }
 
   render() {
+
+    if (this.props.isAuthenticated){
+      return (
+        <View style={loader}>
+          <ActivityIndicator size="large" />
+        </View>
+      )
+    }
     return (
         <View style={styles.container}>
           <View style={{flex:1}}>
@@ -77,7 +85,11 @@ class AuthScreen extends React.Component {
   }
 }
 
-export default connect(null, { signIn })(AuthScreen)
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+})
+
+export default connect(mapStateToProps, { signIn })(AuthScreen)
 
 const styles = StyleSheet.create({
   container: {
@@ -104,5 +116,12 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
     backgroundColor:'white',
+  },
+  loader: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+    flex: 1,
+    justifyContent: "center",
   }
 })
