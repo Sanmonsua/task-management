@@ -12,17 +12,19 @@ import AddCategoryForm from '../components/AddCategoryForm'
 class AddCategoryScreen extends React.Component {
     
 	render (){
+		console.log(this.props)
 		return (
 			<View style={styles.container}>
-				<BackButton 
+				{ this.props.route.params.back && <BackButton 
 					onPress={()=>this.props.navigation.pop()}
-				/>
+				/>}
+				
 				<Text numberOfLines={1} adjustsFontSizeToFit style={styles.title}>
                     Create Category
 				</Text>
 				<View style={{flex:1}}>
 					<AddCategoryForm
-						onSubmit={()=>this.props.navigation.pop()}
+						onSubmit={()=>this.props.navigation.navigate('TasksListScreen')}
 					/>
 				</View>
                 
@@ -33,6 +35,7 @@ class AddCategoryScreen extends React.Component {
 
 AddCategoryScreen.propTypes = {
 	navigation : PropTypes.object,
+	route : PropTypes.object,
 }
 
 

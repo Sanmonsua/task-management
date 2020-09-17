@@ -25,7 +25,7 @@ class AuthScreen extends React.Component {
     const user = await GoogleSignIn.signInSilentlyAsync()
     if (user){
       this.props.signIn({ user })
-      this.props.navigation.navigate('TasksListScreen')
+      this.props.navigation.navigate('LoadingScreen')
     }
   }
 

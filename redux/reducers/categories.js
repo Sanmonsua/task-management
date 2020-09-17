@@ -1,24 +1,16 @@
-import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY, EDIT_TASK, FETCH_CATEGORIES } from '../actionTypes'
+import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY, EDIT_TASK, FETCH_CATEGORIES, INIT_ACCOUNT} from '../actionTypes'
 
 const initialState = {
 	allIds : [],
-	byIds : {
-		'0' : {
-			color:'#f55c33',
-			name:'Work',
-			id:'0',
-			tasks:[],
-		}
-	},
+	byIds : {},
 	selectedId : '0',
-	newId : 1,
+	newId : 0,
 }
 
 export default function (state=initialState, action) {
 	switch (action.type){
 	case FETCH_CATEGORIES : {
 		const { categories } = action.payload
-		if (!categories) return {... state}
 		return {
 			... state,
 			allIds: categories.map(c => c.id),
@@ -92,7 +84,9 @@ export default function (state=initialState, action) {
 			selectedId : action.payload.categoryId,
 		}
 	}
-	default:
+	case INIT_ACCOUNT : 
+		return initialState
+	default :
 		return state
 	}
 }

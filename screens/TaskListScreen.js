@@ -1,112 +1,105 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { StyleSheet, Text, View } from 'react-native'
 import Constants from 'expo-constants'
 
-import { fetchCategories } from '../redux/actions'
 import { connect } from 'react-redux'
-import { onChangeStore } from '../redux/store'
 
 import TasksFlatList from '../components/TasksFlatList'
 import CategoriesFlatList from '../components/CategoriesFlatList'
 import AddCategoryButton from '../components/AddCategoryButton'
 import Button from '../components/Button'
 
-class TaskListScreen extends React.Component {
-  state = {
-    isReady: false,
-  }
 
-  fetchData = async() => {
-    await this.props.fetchCategories({ uid : this.props.uid })
-    this.setState(
-      { isReady:true }
-    )
-    onChangeStore()
-  }
+class TaskListScreen extends React.Component {
   
-  render(){
-    if (!this.state.isReady){
-      this.fetchData()
-      return <View></View>
-    }
+	render(){
     
-    return (
-        <View style={styles.container}>
-          <View style={styles.tasks}>
-            <Text style={styles.textMuted}>
+		return (
+			<View style={styles.container}>
+				<View style={styles.tasks}>
+					<Text style={styles.textMuted}>
               CATEGORY
-            </Text>
-            <View style={{width:"100%"}}>
-              <Text 
-                numberOfLines={1} 
-                adjustsFontSizeToFit 
-                style={styles.title}
-              >
-                {this.props.category.name}
-              </Text>
-            </View>
-            <TasksFlatList 
-              color={this.props.category.color}
-              tasks={this.props.category.tasks}
-              navigation={this.props.navigation}
-            />
-            <Button
-              title="+ ADD NEW TASK" 
-              color={this.props.category.color}
-              onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
-            />
-          </View>
-          <View style={styles.categories}>
-              <CategoriesFlatList 
-                selectedId={this.props.category.id}
-                categories={this.props.categories}
-              />
-              <AddCategoryButton 
-                onPress={()=>this.props.navigation.navigate('AddCategoryScreen')}
-              />
-          </View>
-        </View>
-    );
-  }
+					</Text>
+					<View style={{width:'100%'}}>
+						<Text 
+							numberOfLines={1} 
+							adjustsFontSizeToFit 
+							style={styles.title}
+						>
+							{this.props.category.name}
+						</Text>
+					</View>
+					<TasksFlatList 
+						color={this.props.category.color}
+						tasks={this.props.category.tasks}
+						navigation={this.props.navigation}
+					/>
+					<Button
+						title="+ ADD NEW TASK" 
+						color={this.props.category.color}
+						onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
+					/>
+				</View>
+				<View style={styles.categories}>
+					<CategoriesFlatList 
+						selectedId={this.props.category.id}
+						categories={this.props.categories}
+					/>
+					<AddCategoryButton 
+						onPress={()=>this.props.navigation.navigate('AddCategoryScreen', { back : true })}
+					/>
+				</View>
+			</View>
+		)
+	}
+}
+
+TaskListScreen.propTypes = {
+	categories : PropTypes.array, 
+	category : PropTypes.object,
+	selectedId : PropTypes.string,
+	uid : PropTypes.string,
+	navigation : PropTypes.object,
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories.allIds.map(
-    categoryId => state.categories.byIds[categoryId]),
-  category : state.categories.byIds[state.categories.selectedId],
-  selectedId : state.categories.selectedId,
-  uid : state.user.uid,
+	categories: state.categories.allIds.map(
+		categoryId => state.categories.byIds[categoryId]),
+	category : state.categories.byIds[state.categories.selectedId],
+	selectedId : state.categories.selectedId,
+	uid : state.user.uid,
 })
 
-export default connect(mapStateToProps, { fetchCategories })(TaskListScreen)
+export default connect(mapStateToProps)(TaskListScreen)
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    paddingTop: Constants.statusBarHeight,
-  },
-  tasks: {
-    backgroundColor: "white",
-    width: "80%",
-    flex: 1,
-    paddingVertical: 40,
-    paddingHorizontal: 20,
-  },
-  categories: {
-    backgroundColor: "#222429",
-    width: "20%",
-    padding : 12,
-    justifyContent : 'center',
-  },
-  textMuted: { 
-    color: "#d1d9e4", 
-    fontSize: 18,
-    fontFamily : 'kumbhSansBold',
-  },
-  title : {
-    fontSize: 50,
-    fontFamily : 'kumbhSansBold',
-  },
-});
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		flexDirection: 'row',
+		paddingTop: Constants.statusBarHeight,
+	},
+	tasks: {
+		backgroundColor: 'white',
+		width: '80%',
+		flex: 1,
+		paddingVertical: 40,
+		paddingHorizontal: 20,
+	},
+	categories: {
+		backgroundColor: '#222429',
+		width: '20%',
+		padding : 12,
+		justifyContent : 'center',
+	},
+	textMuted: { 
+		color: '#d1d9e4', 
+		fontSize: 18,
+		fontFamily : 'kumbhSansBold',
+	},
+	title : {
+		fontSize: 50,
+		fontFamily : 'kumbhSansBold',
+	},
+})

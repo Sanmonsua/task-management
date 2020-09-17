@@ -13,6 +13,7 @@ import AddTaskScreen from './screens/AddTaskScreen'
 import AddCategoryScreen from './screens/AddCategoryScreen'
 import EditTaskScreen from './screens/EditTaskScreen'
 import AuthScreen from './screens/AuthScreen'
+import LoadingScreen from './screens/LoadingScreen'
 
 import FlashMessage from "react-native-flash-message"
 
@@ -49,6 +50,11 @@ export default class App extends React.Component {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="AuthScreen">
+              <Stack.Screen
+                component={LoadingScreen}
+                name="LoadingScreen"
+                options={{headerShown:false}}
+              />
               <Stack.Screen
                 component={AuthScreen}
                 name="AuthScreen"
