@@ -9,7 +9,7 @@ import {
 	SIGN_IN, 
 	INIT_ACCOUNT } from './actionTypes'
 
-import {firebaseApp} from '../firebase'
+import { firebaseApp } from '../firebase'
 
 // action creators
 export const signIn = user => ({
@@ -20,7 +20,7 @@ export const signIn = user => ({
 export const addCategory = newCategory => ({
 	type: ADD_CATEGORY,
 	payload: {
-		... newCategory, 
+		... newCategory,
 		tasks : [],
 	},
 })
@@ -36,6 +36,7 @@ export const addTask = newTask => ({
 	type: ADD_TASK,
 	payload: {
 		...newTask,
+		id : `${Date.now()}`,
 		done : false,
 	},
 })
