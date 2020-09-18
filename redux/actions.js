@@ -7,6 +7,7 @@ import {
 	SELECT_CATEGORY, 
 	FETCH_CATEGORIES, 
 	SIGN_IN, 
+	DELETE_TASK, 
 	INIT_ACCOUNT } from './actionTypes'
 
 import { firebaseApp } from '../firebase'
@@ -48,6 +49,11 @@ export const editTask = task => ({
 
 export const toggleTask = task => ({
 	type: TOGGLE_TASK,
+	payload: task,
+})
+
+export const deleteTask = task => ({
+	type: DELETE_TASK,
 	payload: task,
 })
 

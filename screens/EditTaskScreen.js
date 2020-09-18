@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Constants from 'expo-constants'
 
 import { connect } from 'react-redux'
+import { deleteTask } from '../redux/actions'
 
 import BackButton from '../components/BackButton'
 import EditTaskForm from '../components/EditTaskForm'
@@ -11,7 +12,12 @@ import DeleteButton from '../components/DeleteButton'
 
 
 class EditTaskScreen extends React.Component {
-    
+	
+	onDelete = () =>{
+		this.props.deleteTask(this.props.route.params.item)
+		this.props.navigation.pop()
+	}
+
 	render (){
 		return (
 			<View style={styles.container}>
@@ -20,7 +26,7 @@ class EditTaskScreen extends React.Component {
 						onPress={()=>this.props.navigation.pop()}
 					/>
 					<DeleteButton 
-						onPress={()=>null} 
+						onPress={()=>this.onDelete()} 
 					/>
 				</View>
 				
@@ -46,6 +52,7 @@ EditTaskScreen.propTypes = {
 	route : PropTypes.object,
 	categories : PropTypes.array,
 	category: PropTypes.object,
+	deleteTask : PropTypes.func,
 }
 
 
@@ -55,7 +62,7 @@ const mapStateToProps = state => ({
 	category : state.categories.byIds[state.categories.selectedId],
 })
   
-export default connect(mapStateToProps)(EditTaskScreen)
+export default connect(mapStateToProps, { deleteTask })(EditTaskScreen)
 
 
 const styles = StyleSheet.create({

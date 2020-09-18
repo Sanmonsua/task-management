@@ -6,7 +6,7 @@ import {
 	EDIT_TASK,
 	EDIT_CATEGORY,
 	FETCH_CATEGORIES, 
-	INIT_ACCOUNT
+	INIT_ACCOUNT, DELETE_TASK
 } from '../actionTypes'
 
 const initialState = {
@@ -96,7 +96,22 @@ export default function (state=initialState, action) {
 				}
 			}
 		}
-	}                
+	}    
+	case DELETE_TASK:{
+		const task = action.payload
+		return {
+			...state,
+			byIds : {
+				...state.byIds,
+				[task.categoryId]:{
+					...state.byIds[task.categoryId],
+					tasks : state.byIds[task.categoryId].tasks.filter(
+						t => t.id !== task.id
+					)
+				}
+			}
+		}
+	}            
 	case SELECT_CATEGORY: {
 		return {
 			...state,
