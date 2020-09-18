@@ -1,4 +1,13 @@
-import { ADD_TASK, ADD_CATEGORY, TOGGLE_TASK, SELECT_CATEGORY, EDIT_TASK, FETCH_CATEGORIES, INIT_ACCOUNT} from '../actionTypes'
+import { 
+	ADD_TASK, 
+	ADD_CATEGORY, 
+	TOGGLE_TASK, 
+	SELECT_CATEGORY, 
+	EDIT_TASK,
+	EDIT_CATEGORY,
+	FETCH_CATEGORIES, 
+	INIT_ACCOUNT
+} from '../actionTypes'
 
 const initialState = {
 	allIds : [],
@@ -40,11 +49,21 @@ export default function (state=initialState, action) {
 			...state,
 			byIds : {
 				... state.byIds, 
-				[state.newId]:{... action.payload, id : state.newId}
+				[state.newId]:{... action.payload, id : `${state.newId}`}
 			},
 			allIds : [ ...state.allIds, state.newId ],
-			selectedId : state.newId,
-			newId : `${+state.newId++}`
+			selectedId : `${state.newId}`,
+			newId : `${state.newId++}`
+		}
+	}
+	case EDIT_CATEGORY : {
+		const { id } = action.payload
+		return {
+			...state,
+			byIds : {
+				... state.byIds, 
+				[id]:{... action.payload}
+			},
 		}
 	}
 	case TOGGLE_TASK:{

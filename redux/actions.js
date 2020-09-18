@@ -1,4 +1,14 @@
-import { ADD_CATEGORY, ADD_TASK, TOGGLE_TASK, EDIT_TASK, SELECT_CATEGORY, FETCH_CATEGORIES, SIGN_IN, INIT_ACCOUNT } from './actionTypes'
+import { 
+	ADD_CATEGORY, 
+	ADD_TASK, 
+	TOGGLE_TASK, 
+	EDIT_TASK,
+	EDIT_CATEGORY,
+	SELECT_CATEGORY, 
+	FETCH_CATEGORIES, 
+	SIGN_IN, 
+	INIT_ACCOUNT } from './actionTypes'
+
 import {firebaseApp} from '../firebase'
 
 // action creators
@@ -12,6 +22,13 @@ export const addCategory = newCategory => ({
 	payload: {
 		... newCategory, 
 		tasks : [],
+	},
+})
+
+export const editCategory = newCategory => ({
+	type: EDIT_CATEGORY,
+	payload: {
+		... newCategory,
 	},
 })
 
