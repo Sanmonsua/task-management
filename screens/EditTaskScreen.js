@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 import BackButton from '../components/BackButton'
 import EditTaskForm from '../components/EditTaskForm'
+import DeleteButton from '../components/DeleteButton'
 
 
 class EditTaskScreen extends React.Component {
@@ -14,9 +15,15 @@ class EditTaskScreen extends React.Component {
 	render (){
 		return (
 			<View style={styles.container}>
-				<BackButton 
-					onPress={()=>this.props.navigation.pop()}
-				/>
+				<View style={{flexDirection : 'row', justifyContent:'space-between', alignItems:'center'}}>
+					<BackButton 
+						onPress={()=>this.props.navigation.pop()}
+					/>
+					<DeleteButton 
+						onPress={()=>null} 
+					/>
+				</View>
+				
 				<Text style={styles.title}>
                     Edit Task
 				</Text>
