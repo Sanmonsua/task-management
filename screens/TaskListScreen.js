@@ -23,14 +23,27 @@ class TaskListScreen extends React.Component {
               CATEGORY
 					</Text>
 					<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-						<Text 
-							numberOfLines={1} 
-							adjustsFontSizeToFit 
-							style={styles.title}
-						>
-							{this.props.category.name}
-						</Text>
-						<TouchableOpacity>
+						<View style={{flex:1}}>
+							<Text 
+								numberOfLines={1} 
+								adjustsFontSizeToFit 
+								style={styles.title}
+							>
+								{this.props.category.name}
+							</Text>
+						</View>
+						
+						<TouchableOpacity 
+							style={{marginHorizontal:20}} 
+							onPress={()=>this.props.navigation.navigate('EditCategoryScreen', { 
+								back : true,
+								category : {
+									color : this.props.category.color,
+									name : this.props.category.name,
+									id : this.props.category.id,
+								}
+							})
+							}>
 							<Feather name="edit-3" size={24} color="black" />
 						</TouchableOpacity>
 					</View>

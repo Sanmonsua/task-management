@@ -11,6 +11,7 @@ import * as Font from 'expo-font'
 import TaskListScreen from './screens/TaskListScreen'
 import AddTaskScreen from './screens/AddTaskScreen'
 import AddCategoryScreen from './screens/AddCategoryScreen'
+import EditCategoryScreen from './screens/EditCategoryScreen'
 import EditTaskScreen from './screens/EditTaskScreen'
 import AuthScreen from './screens/AuthScreen'
 import LoadingScreen from './screens/LoadingScreen'
@@ -78,6 +79,11 @@ export default class App extends React.Component {
               <Stack.Screen 
                 component={AddCategoryScreen}
                 name="AddCategoryScreen"
+                options={{headerShown:false}}
+              />
+              <Stack.Screen 
+                component={EditCategoryScreen}
+                name="EditCategoryScreen"
                 options={{headerShown:false}}
               />
             </Stack.Navigator>

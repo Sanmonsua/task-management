@@ -55,10 +55,9 @@ class AuthScreen extends React.Component {
   }
 
   render() {
-
     if (this.props.isAuthenticated){
       return (
-        <View style={loader}>
+        <View style={styles.loader}>
           <ActivityIndicator size="large" />
         </View>
       )
@@ -79,7 +78,6 @@ class AuthScreen extends React.Component {
               <Ionicons name="ios-arrow-round-forward" size={40} color="black" />
             </TouchableOpacity>
           </View>
-          
         </View>
       )
   }
