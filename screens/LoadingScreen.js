@@ -1,60 +1,59 @@
-import React from "react"
-import { ActivityIndicator, StyleSheet, View } from "react-native"
-import PropTypes from "prop-types"
+import React from 'react'
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
+import PropTypes from 'prop-types'
 
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchCategories } from '../redux/actions'
 import { onChangeStore } from '../redux/store'
 
 
-class LoadingScreen extends React.Component {
+const LoadingScreen = ({ navigation }) => {
 
-    componentDidMount(){
-        this.fetchData()
-    }
+	const categories = useSelector(state => state.categories.allIds)
+	const uid = useSelector(state => state.user.uid)
+	const dispatch = useDispatch()
 
-    fetchData = async() => {
-        await this.props.fetchCategories({ uid : this.props.uid })
-        onChangeStore()
-        if (this.props.categories.length > 0){
-            this.props.navigation.navigate('TasksListScreen')
-        } else {
-            this.props.navigation.navigate('AddCategoryScreen', { back : false })
-        }
-    }
+	const fetchData = async() => {
+		dispatch(fetchCategories({ uid : uid }))
+		onChangeStore()
+		if (categories.length > 0){
+			navigation.navigate('TasksListScreen')
+		} else {
+			navigation.navigate('AddCategoryScreen', { back : false })
+		}
+	} 
+  
+	React.useEffect(
+		() => navigation.addListener('focus', () => fetchData()),
+		[navigation]
+	)
 
-    render() {
-        return(
-            <View style={[styles.container, styles.horizontal]}>
-              <ActivityIndicator size="large" />
-            </View>
-        )          
-    }
+	return(
+		<View style={[styles.container, styles.horizontal]}>
+			<ActivityIndicator size="large" />
+		</View>
+	)          
+    
 } 
 
 LoadingScreen.propTypes = {
-   categories : PropTypes.array,
-   uid : PropTypes.string,
-   navigation : PropTypes.object,
+	categories : PropTypes.array,
+	uid : PropTypes.string,
+	navigation : PropTypes.object,
 }
 
-const mapStateToProps = state =>({
-    categories : state.categories.allIds,
-    uid : state.user.uid,
-})
-
-export default connect(mapStateToProps, { fetchCategories })(LoadingScreen);
+export default LoadingScreen
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10
-  }
+	container: {
+		flex: 1,
+		justifyContent: 'center'
+	},
+	horizontal: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		padding: 10
+	}
 })
 
