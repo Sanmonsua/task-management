@@ -12,7 +12,7 @@ import AddCategoryForm from '../components/AddCategoryForm'
 class AddCategoryScreen extends React.Component {
     
 	render (){
-		console.log(this.props)
+
 		return (
 			<View style={styles.container}>
 				{ this.props.route.params.back && <BackButton 
