@@ -14,61 +14,75 @@ import Button from '../components/Button'
 
 class TaskListScreen extends React.Component {
   
+	state = {
+		isReady : false
+	}
+
+
 	render(){
-    
-		return (
-			<View style={styles.container}>
-				<View style={styles.tasks}>
-					<Text style={styles.textMuted}>
-              CATEGORY
-					</Text>
-					<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-						<View style={{flex:1}}>
-							<Text 
-								numberOfLines={1} 
-								adjustsFontSizeToFit 
-								style={styles.title}
-							>
-								{this.props.category.name}
-							</Text>
+
+		if (!this.props.category){
+			this.props.navigation.navigate('AddCategoryScreen', { back : true })
+			return <View></View>
+		} else {
+			return (
+				<View style={styles.container}>
+					<View style={styles.tasks}>
+						<Text style={styles.textMuted}>
+				  			CATEGORY
+						</Text>
+						<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
+							<View style={{flex:1}}>
+								<Text 
+									numberOfLines={1} 
+									adjustsFontSizeToFit 
+									style={styles.title}
+								>
+									{this.props.category.name}
+								</Text>
+							</View>
+							
+							<TouchableOpacity 
+								style={{marginHorizontal:20}} 
+								onPress={()=>{
+									this.setState({ isReady: false })
+									this.props.navigation.navigate('EditCategoryScreen', { 
+									back : true,
+									category : {
+										color : this.props.category.color,
+										name : this.props.category.name,
+										id : this.props.category.id,
+									}
+								})}
+								}>
+								<Feather name="edit-3" size={24} color="black" />
+							</TouchableOpacity>
 						</View>
-						
-						<TouchableOpacity 
-							style={{marginHorizontal:20}} 
-							onPress={()=>this.props.navigation.navigate('EditCategoryScreen', { 
-								back : true,
-								category : {
-									color : this.props.category.color,
-									name : this.props.category.name,
-									id : this.props.category.id,
-								}
-							})
-							}>
-							<Feather name="edit-3" size={24} color="black" />
-						</TouchableOpacity>
+						<TasksFlatList 
+							color={this.props.category.color}
+							tasks={this.props.category.tasks}
+							navigation={this.props.navigation}
+						/>
+						<Button
+							title="+ ADD NEW TASK" 
+							color={this.props.category.color}
+							onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
+						/>
 					</View>
-					<TasksFlatList 
-						color={this.props.category.color}
-						tasks={this.props.category.tasks}
-						navigation={this.props.navigation}
-					/>
-					<Button
-						title="+ ADD NEW TASK" 
-						color={this.props.category.color}
-						onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
-					/>
+					<View style={styles.categories}>
+						<CategoriesFlatList 
+							selectedId={this.props.category.id}
+							categories={Object.values(this.props.categories)}
+						/>
+						<AddCategoryButton 
+							onPress={()=>this.props.navigation.navigate('AddCategoryScreen', { back : true })}
+						/>
+					</View>
 				</View>
-				<View style={styles.categories}>
-					<CategoriesFlatList 
-						selectedId={this.props.category.id}
-						categories={this.props.categories}
-					/>
-					<AddCategoryButton 
-						onPress={()=>this.props.navigation.navigate('AddCategoryScreen', { back : true })}
-					/>
-				</View>
-			</View>
-		)
+			)
+		}
+		
+		
 	}
 }
 
@@ -81,8 +95,7 @@ TaskListScreen.propTypes = {
 }
 
 const mapStateToProps = state => ({
-	categories: state.categories.allIds.map(
-		categoryId => state.categories.byIds[categoryId]),
+	categories: state.categories.byIds,
 	category : state.categories.byIds[state.categories.selectedId],
 	selectedId : state.categories.selectedId,
 	uid : state.user.uid,

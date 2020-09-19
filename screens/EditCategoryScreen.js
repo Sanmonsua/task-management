@@ -15,7 +15,7 @@ class EditCategoryScreen extends React.Component {
 	
 	onDelete = async() => {
 		await this.props.deleteCategory(this.props.route.params.category)
-		this.props.navigation.navigate('TasksListScreen')
+		this.props.navigation.goBack()
 	}
 
 	render (){
@@ -53,9 +53,7 @@ EditCategoryScreen.propTypes = {
 
 
 const mapStateToProps = state => ({
-	categories: state.categories.allIds.map(
-		categoryId => state.categories.byIds[categoryId]),
-	category : state.categories.byIds[state.categories.selectedId],
+	categories: state.categories.allIds,
 })
   
 export default connect(mapStateToProps, { deleteCategory })(EditCategoryScreen)

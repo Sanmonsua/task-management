@@ -15,7 +15,7 @@ class EditTaskScreen extends React.Component {
 	
 	onDelete = () =>{
 		this.props.deleteTask(this.props.route.params.item)
-		this.props.navigation.pop()
+		this.props.navigation.goBack()
 	}
 
 	render (){
