@@ -6,14 +6,15 @@ import {
 	EDIT_TASK,
 	EDIT_CATEGORY,
 	FETCH_CATEGORIES, 
-	INIT_ACCOUNT, DELETE_TASK
+	INIT_ACCOUNT, 
+	DELETE_TASK,
+	DELETE_CATEGORY,
 } from '../actionTypes'
 
 const initialState = {
 	allIds : [],
 	byIds : {},
-	selectedId : '0',
-	newId : 0,
+	selectedId : null,
 }
 
 export default function (state=initialState, action) {
@@ -22,10 +23,9 @@ export default function (state=initialState, action) {
 		const { categories } = action.payload
 		return {
 			... state,
-			allIds: categories.map(c => c.id),
-			byIds: {...state.byIds, ... categories},
-			selectedId : +state.selectedId >= categories.length ? '0' : state.selectedId,
-			newId: `${categories.length}`
+			allIds: Object.keys(categories),
+			byIds: {... categories},
+			selectedId : +state.selectedId >= categories.length ? categories[0].id : state.selectedId,
 		}
 	}
 	case ADD_TASK : {
@@ -49,11 +49,10 @@ export default function (state=initialState, action) {
 			...state,
 			byIds : {
 				... state.byIds, 
-				[state.newId]:{... action.payload, id : `${state.newId}`}
+				[action.payload.id]:{... action.payload}
 			},
 			allIds : [ ...state.allIds, state.newId ],
-			selectedId : `${state.newId}`,
-			newId : `${state.newId++}`
+			selectedId : action.payload.id,
 		}
 	}
 	case EDIT_CATEGORY : {
@@ -111,7 +110,23 @@ export default function (state=initialState, action) {
 				}
 			}
 		}
-	}            
+	}   
+	case DELETE_CATEGORY:{
+		const categoryToDelete = action.payload
+		console.log(categoryToDelete)
+		const newIds = state.allIds.filter(id => id !== categoryToDelete.id)
+		return {
+			...state,
+			allIds : newIds,
+			byIds : Object.keys(state.byIds).reduce((obj, key) =>{
+				if (key !== categoryToDelete.id){
+					obj[key] = state.byIds[key]
+				}
+				return obj
+			}, {}),
+			selectedId : newIds[0]
+		}
+	}         
 	case SELECT_CATEGORY: {
 		return {
 			...state,

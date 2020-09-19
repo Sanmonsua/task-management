@@ -8,7 +8,9 @@ import {
 	FETCH_CATEGORIES, 
 	SIGN_IN, 
 	DELETE_TASK, 
-	INIT_ACCOUNT } from './actionTypes'
+	INIT_ACCOUNT, 
+	DELETE_CATEGORY 
+} from './actionTypes'
 
 import { firebaseApp } from '../firebase'
 
@@ -22,6 +24,7 @@ export const addCategory = newCategory => ({
 	type: ADD_CATEGORY,
 	payload: {
 		... newCategory,
+		id : `${Date.now()}`,
 		tasks : [],
 	},
 })
@@ -55,6 +58,11 @@ export const toggleTask = task => ({
 export const deleteTask = task => ({
 	type: DELETE_TASK,
 	payload: task,
+})
+
+export const deleteCategory = category => ({
+	type: DELETE_CATEGORY,
+	payload: category,
 })
 
 export const selectCategory = category =>({

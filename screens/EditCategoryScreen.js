@@ -4,20 +4,32 @@ import PropTypes from 'prop-types'
 import Constants from 'expo-constants'
 
 import { connect } from 'react-redux'
+import { deleteCategory } from '../redux/actions'
 
 import BackButton from '../components/BackButton'
+import DeleteButton from '../components/DeleteButton'
 import EditCategoryForm from '../components/EditCategoryForm'
 
 
 class EditCategoryScreen extends React.Component {
-    
+	
+	onDelete = async() => {
+		await this.props.deleteCategory(this.props.route.params.category)
+		this.props.navigation.navigate('TasksListScreen')
+	}
+
 	render (){
 
 		return (
 			<View style={styles.container}>
-				{ this.props.route.params.back && <BackButton 
-					onPress={()=>this.props.navigation.pop()}
-				/>}
+				<View style={styles.actionsRow}>
+					<BackButton 
+						onPress={()=>this.props.navigation.pop()}
+					/>
+					<DeleteButton 
+						onPress={()=>this.onDelete()} 
+					/>
+				</View>
 				
 				<Text numberOfLines={1} adjustsFontSizeToFit style={styles.title}>
                     Edit Category
@@ -46,7 +58,7 @@ const mapStateToProps = state => ({
 	category : state.categories.byIds[state.categories.selectedId],
 })
   
-export default connect(mapStateToProps)(EditCategoryScreen)
+export default connect(mapStateToProps, { deleteCategory })(EditCategoryScreen)
 
 
 const styles = StyleSheet.create({
@@ -61,4 +73,9 @@ const styles = StyleSheet.create({
 		color:'#222429',
 		fontFamily : 'kumbhSansBold',
 	},
+	actionsRow : {
+		flexDirection : 'row',
+		justifyContent:'space-between',
+		alignItems:'center'
+	}
 })
