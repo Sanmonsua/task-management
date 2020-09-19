@@ -13,9 +13,9 @@ import EditCategoryForm from '../components/EditCategoryForm'
 
 class EditCategoryScreen extends React.Component {
 	
-	onDelete = async() => {
-		await this.props.deleteCategory(this.props.route.params.category)
-		this.props.navigation.goBack()
+	onDelete = () => {
+		this.props.deleteCategory(this.props.route.params.category)
+		this.props.navigation.pop()
 	}
 
 	render (){

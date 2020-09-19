@@ -14,15 +14,10 @@ import Button from '../components/Button'
 
 class TaskListScreen extends React.Component {
   
-	state = {
-		isReady : false
-	}
-
-
 	render(){
 
 		if (!this.props.category){
-			this.props.navigation.navigate('AddCategoryScreen', { back : true })
+			this.props.navigation.push('AddCategoryScreen', { back : false })
 			return <View></View>
 		} else {
 			return (
@@ -45,9 +40,7 @@ class TaskListScreen extends React.Component {
 							<TouchableOpacity 
 								style={{marginHorizontal:20}} 
 								onPress={()=>{
-									this.setState({ isReady: false })
-									this.props.navigation.navigate('EditCategoryScreen', { 
-									back : true,
+									this.props.navigation.push('EditCategoryScreen', { 
 									category : {
 										color : this.props.category.color,
 										name : this.props.category.name,

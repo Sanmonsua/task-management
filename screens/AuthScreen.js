@@ -55,7 +55,7 @@ class AuthScreen extends React.Component {
   }
 
   render() {
-    if (this.props.isAuthenticated){
+    if (this.props.userAuthenticated){
       return (
         <View style={styles.loader}>
           <ActivityIndicator size="large" />
@@ -84,7 +84,7 @@ class AuthScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.user.isAuthenticated,
+  userAuthenticated: state.user,
 })
 
 export default connect(mapStateToProps, { signIn })(AuthScreen)
