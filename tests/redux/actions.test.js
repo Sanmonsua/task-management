@@ -1,7 +1,8 @@
 import * as actions from '../../redux/actions'
 import * as actionsTypes from '../../redux/actionTypes'
 
-import { mockCategory, mockUser } from '../../mockData'
+import { mockCategory, mockUser, mockTask } from '../../mockData'
+import { firebaseTestApp } from '../../firebase'
 
 // SignIn action
 describe('signIn returns actions', () => {
@@ -17,22 +18,80 @@ describe('signIn returns actions', () => {
     })
 })
 
-// AddCategory action
-describe('addCategory returns actions', () => {
+// Tasks actions
+describe('tasks actions', () => {
     
-    it('handles new category', () => {
+    it('handles addTask', () => {
+        expect(actions.addTask(mockTask)).toMatchSnapshot({
+            payload : {
+                id : expect.any(String)
+            }
+        })
+    })
+
+    it('handles editTask', () => {
+        expect(actions.editTask(mockTask)).toMatchSnapshot()
+    })
+
+    it('handles toggleTask', () => {
+        expect(actions.toggleTask(mockTask)).toMatchSnapshot()
+    })
+    
+    it('handles deleteTask', () => {
+        expect(actions.deleteTask(mockTask)).toMatchSnapshot()
+    })
+
+})
+
+// Categories actions
+describe('categories actions', () => {
+
+    it('handles addCategory action', () => {
         expect(actions.addCategory(mockCategory)).toMatchSnapshot({
             payload : {
                 id : expect.any(String)
             }
         })
     })
+
+    it('handles editCategory action', () => {
+        expect(actions.editCategory(mockCategory)).toMatchSnapshot()
+    })
+
+    it('handles deleteCategory action', () => {
+        expect(actions.deleteCategory(mockCategory)).toMatchSnapshot()
+    })
+    
+    it('handles selectCategory action', () => {
+        expect(actions.selectCategory(mockCategory)).toMatchSnapshot()
+    })
+
 })
 
-describe('editCategory returns action', () => {
+describe('fetch categories action cases', () => {
 
-    it('handles valid category', () => {
-        expect(actions.editCategory(mockCategory)).toMatchSnapshot()
+    const firebaseTest = jest.genMockFromModule('firebase')
+
+    const snapshot = { val: () => mockCategory, exportVal: () => mockCategory, exists: jest.fn(() => true) };
+
+    firebaseTest.database = jest.fn().mockReturnValue({
+        ref: jest.fn().mockReturnThis(),
+        on: jest.fn((eventType, callback) => callback(snapshot)),
+        update: jest.fn(() => Promise.resolve(snapshot)),
+        remove: jest.fn(() => Promise.resolve()),
+        once: jest.fn(() => Promise.resolve(snapshot)),
+    })
+
+    it('handles valid user', async() => {
+        const mockDispatch = jest.fn()
+        actions.fetchCategories(mockUser, firebaseTest)(mockDispatch)
+
+        expect(mockDispatch.mock.calls[0][0]).toEqual({
+            type : actionsTypes.FETCH_CATEGORIES,
+            payload: {
+                categories : mockCategory
+            }
+        })
     })
 
 })

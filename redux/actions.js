@@ -70,9 +70,9 @@ export const selectCategory = category =>({
 	payload: category,
 })
 
-export const fetchCategories = ({uid}) => dispatch => {
+export const fetchCategories = (user, app = firebaseApp) => dispatch => {
 	
-	firebaseApp.database().ref(`categories/${uid}`).on('value', snap =>{
+	app.database().ref(`categories/${user.uid}`).on('value', snap =>{
 		if (snap.exists()){
 			dispatch({
 				type: FETCH_CATEGORIES,

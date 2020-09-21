@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`addCategory returns actions handles new category 1`] = `
+exports[`categories actions handles addCategory action 1`] = `
 Object {
   "payload": Object {
     "color": "#a362ea",
@@ -12,7 +12,31 @@ Object {
 }
 `;
 
-exports[`editCategory returns action handles valid category 1`] = `
+exports[`categories actions handles deleteCategory action 1`] = `
+Object {
+  "payload": Object {
+    "color": "#a362ea",
+    "name": "Work",
+    "tasks": Array [
+      Object {
+        "date": "15 sept 2020",
+        "done": false,
+        "id": 1,
+        "name": "Make changes to the new site design",
+      },
+      Object {
+        "date": "11 sept 2020",
+        "done": true,
+        "id": 2,
+        "name": "Try new icon set",
+      },
+    ],
+  },
+  "type": "DELETE_CATEGORY",
+}
+`;
+
+exports[`categories actions handles editCategory action 1`] = `
 Object {
   "payload": Object {
     "color": "#a362ea",
@@ -36,11 +60,83 @@ Object {
 }
 `;
 
+exports[`categories actions handles selectCategory action 1`] = `
+Object {
+  "payload": Object {
+    "color": "#a362ea",
+    "name": "Work",
+    "tasks": Array [
+      Object {
+        "date": "15 sept 2020",
+        "done": false,
+        "id": 1,
+        "name": "Make changes to the new site design",
+      },
+      Object {
+        "date": "11 sept 2020",
+        "done": true,
+        "id": 2,
+        "name": "Try new icon set",
+      },
+    ],
+  },
+  "type": "SELECT_CATEGORY",
+}
+`;
+
 exports[`signIn returns actions handles user uid input 1`] = `
 Object {
   "payload": Object {
     "uid": "admin123",
   },
   "type": "SIGN_IN",
+}
+`;
+
+exports[`tasks actions handles addTask 1`] = `
+Object {
+  "payload": Object {
+    "date": "1600662268405",
+    "done": false,
+    "id": Any<String>,
+    "name": "Make changes to the new site design",
+  },
+  "type": "ADD_TASK",
+}
+`;
+
+exports[`tasks actions handles deleteTask 1`] = `
+Object {
+  "payload": Object {
+    "date": "1600662268405",
+    "done": false,
+    "id": "1600662268405",
+    "name": "Make changes to the new site design",
+  },
+  "type": "DELETE_TASK",
+}
+`;
+
+exports[`tasks actions handles editTask 1`] = `
+Object {
+  "payload": Object {
+    "date": "1600662268405",
+    "done": false,
+    "id": "1600662268405",
+    "name": "Make changes to the new site design",
+  },
+  "type": "EDIT_TASK",
+}
+`;
+
+exports[`tasks actions handles toggleTask 1`] = `
+Object {
+  "payload": Object {
+    "date": "1600662268405",
+    "done": false,
+    "id": "1600662268405",
+    "name": "Make changes to the new site design",
+  },
+  "type": "TOGGLE_TASK",
 }
 `;
