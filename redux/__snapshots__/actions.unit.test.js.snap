@@ -16,6 +16,7 @@ exports[`categories actions handles deleteCategory action 1`] = `
 Object {
   "payload": Object {
     "color": "#a362ea",
+    "id": "1267494525246",
     "name": "Work",
     "tasks": Array [
       Object {
@@ -40,6 +41,7 @@ exports[`categories actions handles editCategory action 1`] = `
 Object {
   "payload": Object {
     "color": "#a362ea",
+    "id": "1267494525246",
     "name": "Work",
     "tasks": Array [
       Object {
@@ -64,6 +66,7 @@ exports[`categories actions handles selectCategory action 1`] = `
 Object {
   "payload": Object {
     "color": "#a362ea",
+    "id": "1267494525246",
     "name": "Work",
     "tasks": Array [
       Object {
@@ -96,6 +99,7 @@ Object {
 exports[`tasks actions handles addTask 1`] = `
 Object {
   "payload": Object {
+    "categoryId": "1267494525246",
     "date": "1600662268405",
     "done": false,
     "id": Any<String>,
@@ -108,6 +112,7 @@ Object {
 exports[`tasks actions handles deleteTask 1`] = `
 Object {
   "payload": Object {
+    "categoryId": "1267494525246",
     "date": "1600662268405",
     "done": false,
     "id": "1600662268405",
@@ -120,6 +125,7 @@ Object {
 exports[`tasks actions handles editTask 1`] = `
 Object {
   "payload": Object {
+    "categoryId": "1267494525246",
     "date": "1600662268405",
     "done": false,
     "id": "1600662268405",
@@ -132,6 +138,7 @@ Object {
 exports[`tasks actions handles toggleTask 1`] = `
 Object {
   "payload": Object {
+    "categoryId": "1267494525246",
     "date": "1600662268405",
     "done": false,
     "id": "1600662268405",

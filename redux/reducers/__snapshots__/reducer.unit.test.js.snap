@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Categories reducer AddCategory action 1`] = `
+Object {
+  "categories": Object {
+    "allIds": Array [
+      "1267494525246",
+      undefined,
+    ],
+    "byIds": Object {
+      "1267494525246": Object {
+        "color": "#a362ea",
+        "id": "1267494525246",
+        "name": "Work",
+        "tasks": Array [
+          Object {
+            "date": "15 sept 2020",
+            "done": false,
+            "id": 1,
+            "name": "Make changes to the new site design",
+          },
+          Object {
+            "date": "11 sept 2020",
+            "done": true,
+            "id": 2,
+            "name": "Try new icon set",
+          },
+        ],
+      },
+      "1482363367071": Object {
+        "color": "#a362ea",
+        "id": "1482363367071",
+        "name": "Work",
+        "tasks": Array [],
+      },
+    },
+    "selectedId": "1482363367071",
+  },
+  "user": Object {},
+}
+`;
+
+exports[`Categories reducer AddTask action 1`] = `
+Object {
+  "categories": Object {
+    "allIds": Array [
+      "1267494525246",
+    ],
+    "byIds": Object {
+      "1267494525246": Object {
+        "color": "#a362ea",
+        "id": "1267494525246",
+        "name": "Work",
+        "tasks": Array [
+          Object {
+            "date": "15 sept 2020",
+            "done": false,
+            "id": 1,
+            "name": "Make changes to the new site design",
+          },
+          Object {
+            "date": "11 sept 2020",
+            "done": true,
+            "id": 2,
+            "name": "Try new icon set",
+          },
+          Object {
+            "categoryId": "1267494525246",
+            "date": "1600662268405",
+            "done": false,
+            "id": "1482363367071",
+            "name": "Make changes to the new site design",
+          },
+        ],
+      },
+    },
+    "selectedId": null,
+  },
+  "user": Object {},
+}
+`;
+
+exports[`Categories reducer Edit category action 1`] = `
+Object {
+  "categories": Object {
+    "allIds": Array [
+      "1267494525246",
+    ],
+    "byIds": Object {
+      "1267494525246": Object {
+        "color": "#a362ea",
+        "id": "1267494525246",
+        "name": "Work",
+        "tasks": Array [
+          Object {
+            "date": "15 sept 2020",
+            "done": false,
+            "id": 1,
+            "name": "Make changes to the new site design",
+          },
+          Object {
+            "date": "11 sept 2020",
+            "done": true,
+            "id": 2,
+            "name": "Try new icon set",
+          },
+        ],
+      },
+    },
+    "selectedId": null,
+  },
+  "user": Object {},
+}
+`;
+
+exports[`Categories reducer fetchCategories action 1`] = `
+Object {
+  "categories": Object {
+    "allIds": Array [
+      "1267494525246",
+    ],
+    "byIds": Object {
+      "1267494525246": Object {
+        "color": "#a362ea",
+        "id": "1267494525246",
+        "name": "Work",
+        "tasks": Array [
+          Object {
+            "date": "15 sept 2020",
+            "done": false,
+            "id": 1,
+            "name": "Make changes to the new site design",
+          },
+          Object {
+            "date": "11 sept 2020",
+            "done": true,
+            "id": 2,
+            "name": "Try new icon set",
+          },
+        ],
+      },
+    },
+    "selectedId": null,
+  },
+  "user": Object {},
+}
+`;
+
+exports[`User reducer signIn action 1`] = `
+Object {
+  "categories": Object {
+    "allIds": Array [
+      "1267494525246",
+    ],
+    "byIds": Object {
+      "1267494525246": Object {
+        "color": "#a362ea",
+        "id": "1267494525246",
+        "name": "Work",
+        "tasks": Array [
+          Object {
+            "date": "15 sept 2020",
+            "done": false,
+            "id": 1,
+            "name": "Make changes to the new site design",
+          },
+          Object {
+            "date": "11 sept 2020",
+            "done": true,
+            "id": 2,
+            "name": "Try new icon set",
+          },
+        ],
+      },
+    },
+    "selectedId": null,
+  },
+  "user": Object {
+    "isAuthenticated": true,
+  },
+}
+`;

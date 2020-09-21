@@ -1,8 +1,6 @@
-import * as actions from '../../redux/actions'
-import * as actionsTypes from '../../redux/actionTypes'
-
-import { mockCategory, mockUser, mockTask } from '../../mockData'
-import { firebaseTestApp } from '../../firebase'
+import * as actions from './actions'
+import * as actionsTypes from './actionTypes'
+import { mockCategory, mockUser, mockTask } from '../mockData'
 
 // SignIn action
 describe('signIn returns actions', () => {
@@ -82,7 +80,7 @@ describe('fetch categories action cases', () => {
 		once: jest.fn(() => Promise.resolve(snapshot)),
 	})
 
-	it('handles valid user', async() => {
+	it('handles valid user', () => {
 		const mockDispatch = jest.fn()
 		actions.fetchCategories(mockUser, firebaseTest)(mockDispatch)
 

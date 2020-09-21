@@ -1,4 +1,5 @@
 export const mockCategory = {
+	id : '1267494525246',
 	name : 'Work',
 	tasks : [
 		{
@@ -22,14 +23,16 @@ export const mockUser = {
 }
 
 export const mockTask = {
+	categoryId : '1267494525246',
 	id : '1600662268405',
 	name: 'Make changes to the new site design',
 	date : '1600662268405',
 	done : false,
 }
 
-export const categories = [
-	{
+export const mockCategories = {
+	'1267494525246' : {
+		id : '1267494525246',
 		name : 'Work',
 		tasks : [
 			{
@@ -46,24 +49,5 @@ export const categories = [
 			},
 		],
 		color : '#a362ea',
-		id : 1,
-	},
-	{
-		name : 'Family',
-		color : '#f5a921',
-		tasks : [],
-		id : 2,
-	},
-	{
-		name : 'Software Design',
-		color : '#43c8dd',
-		tasks : [],
-		id : 3,
-	},
-	{
-		name : 'Programming',
-		color : '#f55c33',
-		tasks : [],
-		id : 4,
-	},
-]
+	}
+}
