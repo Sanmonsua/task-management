@@ -24,7 +24,7 @@ class TaskListScreen extends React.Component {
 				<View style={styles.container}>
 					<View style={styles.tasks}>
 						<Text style={styles.textMuted}>
-				  			CATEGORY
+							CATEGORY
 						</Text>
 						<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
 							<View style={{flex:1}}>
@@ -41,12 +41,12 @@ class TaskListScreen extends React.Component {
 								style={{marginHorizontal:20}} 
 								onPress={()=>{
 									this.props.navigation.push('EditCategoryScreen', { 
-									category : {
-										color : this.props.category.color,
-										name : this.props.category.name,
-										id : this.props.category.id,
-									}
-								})}
+										category : {
+											color : this.props.category.color,
+											name : this.props.category.name,
+											id : this.props.category.id,
+										}
+									})}
 								}>
 								<Feather name="edit-3" size={24} color="black" />
 							</TouchableOpacity>
