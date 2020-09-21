@@ -1,4 +1,4 @@
-export const category = {
+export const mockCategory = {
 	name : 'Work',
 	tasks : [
 		{
@@ -15,6 +15,17 @@ export const category = {
 		},
 	],
 	color : '#a362ea',
+}
+
+export const mockUser = {
+	uid : 'admin123',
+}
+
+export const mockTask = {
+	id : '1600662268405',
+	name: 'Make changes to the new site design',
+	date : '1600662268405',
+	done : false,
 }
 
 export const categories = [

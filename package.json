@@ -3,6 +3,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "test": "jest",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -49,7 +50,7 @@
     "babel-preset-expo": "~8.1.0",
     "eslint": "^7.9.0",
     "eslint-plugin-react": "^7.20.6",
-    "jest": "~25.2.6",
+    "jest": "^25.2.7",
     "react-test-renderer": "~16.11.0"
   },
   "private": true,

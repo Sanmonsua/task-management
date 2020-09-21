@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addCategory returns actions handles new category 1`] = `
+Object {
+  "payload": Object {
+    "color": "#a362ea",
+    "id": Any<String>,
+    "name": "Work",
+    "tasks": Array [],
+  },
+  "type": "ADD_CATEGORY",
+}
+`;
+
+exports[`editCategory returns action handles valid category 1`] = `
+Object {
+  "payload": Object {
+    "color": "#a362ea",
+    "name": "Work",
+    "tasks": Array [
+      Object {
+        "date": "15 sept 2020",
+        "done": false,
+        "id": 1,
+        "name": "Make changes to the new site design",
+      },
+      Object {
+        "date": "11 sept 2020",
+        "done": true,
+        "id": 2,
+        "name": "Try new icon set",
+      },
+    ],
+  },
+  "type": "EDIT_CATEGORY",
+}
+`;
+
+exports[`signIn returns actions handles user uid input 1`] = `
+Object {
+  "payload": Object {
+    "uid": "admin123",
+  },
+  "type": "SIGN_IN",
+}
+`;

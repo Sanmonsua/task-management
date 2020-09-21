@@ -113,7 +113,6 @@ export default function (state=initialState, action) {
 	}   
 	case DELETE_CATEGORY:{
 		const categoryToDelete = action.payload
-		console.log(categoryToDelete)
 		const newIds = state.allIds.filter(id => id !== categoryToDelete.id)
 		return {
 			...state,
