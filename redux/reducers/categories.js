@@ -61,7 +61,10 @@ export default function (state=initialState, action) {
 			...state,
 			byIds : {
 				... state.byIds, 
-				[id]:{... action.payload}
+				[id]:{
+					... action.payload,
+					tasks : state.byIds[id].tasks
+				}
 			},
 		}
 	}
