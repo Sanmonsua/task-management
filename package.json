@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^5.9.0",
     "@reduxjs/toolkit": "^1.4.0",
     "dateformat": "^3.0.3",
+    "eslint-plugin-jest": "^24.0.2",
     "expo": "~38.0.8",
     "expo-constants": "~9.1.1",
     "expo-font": "~8.2.1",

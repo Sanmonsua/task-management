@@ -5,93 +5,109 @@ import Constants from 'expo-constants'
 
 import { connect } from 'react-redux'
 
-import { Feather } from '@expo/vector-icons' 
+import { Feather } from '@expo/vector-icons'
 import TasksFlatList from '../components/TasksFlatList'
 import CategoriesFlatList from '../components/CategoriesFlatList'
 import AddCategoryButton from '../components/AddCategoryButton'
 import Button from '../components/Button'
 
-
 class TaskListScreen extends React.Component {
-  
-	render(){
-
-		if (!this.props.category){
-			this.props.navigation.push('AddCategoryScreen', { back : false })
+	render() {
+		if (!this.props.category) {
+			this.props.navigation.push('AddCategoryScreen', { back: false })
 			return <View></View>
 		} else {
 			return (
 				<View style={styles.container}>
 					<View style={styles.tasks}>
-						<Text style={styles.textMuted}>
-							CATEGORY
-						</Text>
-						<View style={{width:'100%', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-							<View style={{flex:1}}>
-								<Text 
-									numberOfLines={1} 
-									adjustsFontSizeToFit 
+						<Text style={styles.textMuted}>CATEGORY</Text>
+						<View
+							style={{
+								width: '100%',
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+							}}
+						>
+							<View style={{ flex: 1 }}>
+								<Text
+									numberOfLines={1}
+									adjustsFontSizeToFit
 									style={styles.title}
 								>
 									{this.props.category.name}
 								</Text>
 							</View>
-							
-							<TouchableOpacity 
-								style={{marginHorizontal:20}} 
-								onPress={()=>{
-									this.props.navigation.push('EditCategoryScreen', { 
-										category : {
-											color : this.props.category.color,
-											name : this.props.category.name,
-											id : this.props.category.id,
+
+							<TouchableOpacity
+								style={{ marginHorizontal: 20 }}
+								onPress={() => {
+									this.props.navigation.push(
+										'EditCategoryScreen',
+										{
+											category: {
+												color: this.props.category
+													.color,
+												name: this.props.category.name,
+												id: this.props.category.id,
+											},
 										}
-									})}
-								}>
-								<Feather name="edit-3" size={24} color="black" />
+									)
+								}}
+							>
+								<Feather
+									name="edit-3"
+									size={24}
+									color="black"
+								/>
 							</TouchableOpacity>
 						</View>
-						<TasksFlatList 
+						<TasksFlatList
 							color={this.props.category.color}
 							tasks={this.props.category.tasks}
 							navigation={this.props.navigation}
 						/>
 						<Button
-							title="+ ADD NEW TASK" 
+							title="+ ADD NEW TASK"
 							color={this.props.category.color}
-							onPress={()=>this.props.navigation.navigate('AddTaskScreen')}
+							onPress={() =>
+								this.props.navigation.navigate('AddTaskScreen')
+							}
 						/>
 					</View>
 					<View style={styles.categories}>
-						<CategoriesFlatList 
+						<CategoriesFlatList
 							selectedId={this.props.category.id}
 							categories={Object.values(this.props.categories)}
 						/>
-						<AddCategoryButton 
-							onPress={()=>this.props.navigation.push('AddCategoryScreen', { back : true })}
+						<AddCategoryButton
+							onPress={() =>
+								this.props.navigation.push(
+									'AddCategoryScreen',
+									{ back: true }
+								)
+							}
 						/>
 					</View>
 				</View>
 			)
 		}
-		
-		
 	}
 }
 
 TaskListScreen.propTypes = {
-	categories : PropTypes.array, 
-	category : PropTypes.object,
-	selectedId : PropTypes.string,
-	uid : PropTypes.string,
-	navigation : PropTypes.object,
+	categories: PropTypes.array,
+	category: PropTypes.object,
+	selectedId: PropTypes.string,
+	uid: PropTypes.string,
+	navigation: PropTypes.object,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
 	categories: state.categories.byIds,
-	category : state.categories.byIds[state.categories.selectedId],
-	selectedId : state.categories.selectedId,
-	uid : state.user.uid,
+	category: state.categories.byIds[state.categories.selectedId],
+	selectedId: state.categories.selectedId,
+	uid: state.user.uid,
 })
 
 export default connect(mapStateToProps)(TaskListScreen)
@@ -113,16 +129,16 @@ const styles = StyleSheet.create({
 	categories: {
 		backgroundColor: '#222429',
 		width: '20%',
-		padding : 12,
-		justifyContent : 'center',
+		padding: 12,
+		justifyContent: 'center',
 	},
-	textMuted: { 
-		color: '#d1d9e4', 
+	textMuted: {
+		color: '#d1d9e4',
 		fontSize: 18,
-		fontFamily : 'kumbhSansBold',
+		fontFamily: 'kumbhSansBold',
 	},
-	title : {
+	title: {
 		fontSize: 50,
-		fontFamily : 'kumbhSansBold',
+		fontFamily: 'kumbhSansBold',
 	},
 })

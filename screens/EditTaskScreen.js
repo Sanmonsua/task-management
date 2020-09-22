@@ -10,60 +10,56 @@ import BackButton from '../components/BackButton'
 import EditTaskForm from '../components/EditTaskForm'
 import DeleteButton from '../components/DeleteButton'
 
-
 class EditTaskScreen extends React.Component {
-	
-	onDelete = () =>{
+	onDelete = () => {
 		this.props.deleteTask(this.props.route.params.item)
 		this.props.navigation.goBack()
 	}
 
-	render (){
+	render() {
 		return (
 			<View style={styles.container}>
-				<View style={{flexDirection : 'row', justifyContent:'space-between', alignItems:'center'}}>
-					<BackButton 
-						onPress={()=>this.props.navigation.pop()}
-					/>
-					<DeleteButton 
-						onPress={()=>this.onDelete()} 
-					/>
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<BackButton onPress={() => this.props.navigation.pop()} />
+					<DeleteButton onPress={() => this.onDelete()} />
 				</View>
-				
-				<Text style={styles.title}>
-                    Edit Task
-				</Text>
-				<View style={{flex:1}}>
+
+				<Text style={styles.title}>Edit Task</Text>
+				<View style={{ flex: 1 }}>
 					<EditTaskForm
 						task={this.props.route.params.item}
 						categories={this.props.categories}
 						selectedCategory={this.props.category}
-						onSubmit={()=>this.props.navigation.pop()}
+						onSubmit={() => this.props.navigation.pop()}
 					/>
 				</View>
-                
 			</View>
 		)
 	}
 }
 
 EditTaskScreen.propTypes = {
-	navigation : PropTypes.object,
-	route : PropTypes.object,
-	categories : PropTypes.array,
+	navigation: PropTypes.object,
+	route: PropTypes.object,
+	categories: PropTypes.array,
 	category: PropTypes.object,
-	deleteTask : PropTypes.func,
+	deleteTask: PropTypes.func,
 }
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
 	categories: state.categories.allIds.map(
-		categoryId => state.categories.byIds[categoryId]),
-	category : state.categories.byIds[state.categories.selectedId],
+		(categoryId) => state.categories.byIds[categoryId]
+	),
+	category: state.categories.byIds[state.categories.selectedId],
 })
-  
-export default connect(mapStateToProps, { deleteTask })(EditTaskScreen)
 
+export default connect(mapStateToProps, { deleteTask })(EditTaskScreen)
 
 const styles = StyleSheet.create({
 	container: {
@@ -72,9 +68,9 @@ const styles = StyleSheet.create({
 		paddingVertical: Constants.statusBarHeight,
 		paddingHorizontal: 30,
 	},
-	title : {
+	title: {
 		fontSize: 45,
-		color:'#222429',
-		fontFamily : 'kumbhSansBold',
+		color: '#222429',
+		fontFamily: 'kumbhSansBold',
 	},
 })

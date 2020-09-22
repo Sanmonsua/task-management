@@ -9,21 +9,20 @@ describe('signIn returns actions', () => {
 	})
 
 	it('handles user uid empty', () => {
-		expect(actions.signIn({ uid : '' })).toEqual({ 
-			type: actionsTypes.SIGN_IN, 
-			payload: { uid : '' } 
+		expect(actions.signIn({ uid: '' })).toEqual({
+			type: actionsTypes.SIGN_IN,
+			payload: { uid: '' },
 		})
 	})
 })
 
 // Tasks actions
 describe('tasks actions', () => {
-    
 	it('handles addTask', () => {
 		expect(actions.addTask(mockTask)).toMatchSnapshot({
-			payload : {
-				id : expect.any(String)
-			}
+			payload: {
+				id: expect.any(String),
+			},
 		})
 	})
 
@@ -34,21 +33,19 @@ describe('tasks actions', () => {
 	it('handles toggleTask', () => {
 		expect(actions.toggleTask(mockTask)).toMatchSnapshot()
 	})
-    
+
 	it('handles deleteTask', () => {
 		expect(actions.deleteTask(mockTask)).toMatchSnapshot()
 	})
-
 })
 
 // Categories actions
 describe('categories actions', () => {
-
 	it('handles addCategory action', () => {
 		expect(actions.addCategory(mockCategory)).toMatchSnapshot({
-			payload : {
-				id : expect.any(String)
-			}
+			payload: {
+				id: expect.any(String),
+			},
 		})
 	})
 
@@ -59,18 +56,20 @@ describe('categories actions', () => {
 	it('handles deleteCategory action', () => {
 		expect(actions.deleteCategory(mockCategory)).toMatchSnapshot()
 	})
-    
+
 	it('handles selectCategory action', () => {
 		expect(actions.selectCategory(mockCategory)).toMatchSnapshot()
 	})
-
 })
 
 describe('fetch categories action cases', () => {
-
 	const firebaseTest = jest.genMockFromModule('firebase')
 
-	const snapshot = { val: () => mockCategory, exportVal: () => mockCategory, exists: jest.fn(() => true) }
+	const snapshot = {
+		val: () => mockCategory,
+		exportVal: () => mockCategory,
+		exists: jest.fn(() => true),
+	}
 
 	firebaseTest.database = jest.fn().mockReturnValue({
 		ref: jest.fn().mockReturnThis(),
@@ -85,11 +84,10 @@ describe('fetch categories action cases', () => {
 		actions.fetchCategories(mockUser, firebaseTest)(mockDispatch)
 
 		expect(mockDispatch.mock.calls[0][0]).toEqual({
-			type : actionsTypes.FETCH_CATEGORIES,
+			type: actionsTypes.FETCH_CATEGORIES,
 			payload: {
-				categories : mockCategory
-			}
+				categories: mockCategory,
+			},
 		})
 	})
-
 })

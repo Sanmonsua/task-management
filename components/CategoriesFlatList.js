@@ -7,31 +7,30 @@ import CategoryButton from './CategoryButton'
 import { connect } from 'react-redux'
 import { selectCategory } from '../redux/actions'
 
-
 function renderItem({ item, selectedId, select }) {
-    
 	return (
-		<CategoryButton 
-			name={item.name} 
+		<CategoryButton
+			name={item.name}
 			color={item.color}
 			selected={item.id === selectedId}
-			onPress={() => select({ categoryId : item.id })}
+			onPress={() => select({ categoryId: item.id })}
 		/>
 	)
 }
 
 function CategoriesFlatList(props) {
 	return (
-		<FlatList 
+		<FlatList
 			data={props.categories}
 			keyExtractor={(item) => item.id}
-			renderItem={({item}) => renderItem({
-				item,
-				selectedId : props.selectedId,
-				select : props.selectCategory,
-			})}
+			renderItem={({ item }) =>
+				renderItem({
+					item,
+					selectedId: props.selectedId,
+					select: props.selectCategory,
+				})
+			}
 		/>
-        
 	)
 }
 

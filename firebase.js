@@ -8,7 +8,7 @@ const firebaseConfig = {
 	storageBucket: 'tasks-rn.appspot.com',
 	messagingSenderId: '948857622296',
 	appId: '1:948857622296:web:5183e364a46bac0b8a586d',
-	measurementId: 'G-WS25SFDW2T'
+	measurementId: 'G-WS25SFDW2T',
 }
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)

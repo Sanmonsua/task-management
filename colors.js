@@ -22,7 +22,7 @@ const colors = [
 	{
 		name: 'Violet',
 		code: '#EE82EE',
-	}
+	},
 ]
 
 export default colors

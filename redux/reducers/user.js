@@ -5,13 +5,13 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-	switch (action.type){
-	case SIGN_IN:
-		return {
-			... action.payload.user,
-			isAuthenticated: true,
-		}
-	default : 
-		return state
+	switch (action.type) {
+		case SIGN_IN:
+			return {
+				...action.payload.user,
+				isAuthenticated: true,
+			}
+		default:
+			return state
 	}
 }
