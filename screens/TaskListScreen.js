@@ -64,7 +64,13 @@ class TaskListScreen extends React.Component {
 						</View>
 						<TasksFlatList
 							color={this.props.category.color}
-							tasks={this.props.category.tasks}
+							tasks={this.props.category.tasks.sort(
+								function compareTasks(t1, t2) {
+									if (t1.done && t2.done) return 0
+									else if (t1.done) return 1
+									else return -1
+								}
+							)}
 							navigation={this.props.navigation}
 						/>
 						<Button
